@@ -1,0 +1,15 @@
+server:
+  port: 9101
+  context-path: /
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:123456@localhost:8761/eureka/
+spring:
+  application:
+    name: turbineService
+turbine:
+  appConfig: serviceCustomer
+  aggregator:
+    clusterConfig: TEST-TURBINE
+  clusterNameExpression: metadata['cluster']
