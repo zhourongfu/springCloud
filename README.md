@@ -28,7 +28,9 @@
 消息总线bus
 
     修改配置中心/properties/configClient-pro.properties配置  aaa=im updated
-    POST访问 http://localhost:7000/bus/refresh  刷新配置中心的值
+
+    触发配置中心把修改后的值分发到微服务
+    curl -X POST http://config:cf123456@192.168.198.1:7000/bus/refresh
 
     访问 http://localhost:8081/test  查看clientA 微服务消费配置中心修改后的值
     访问 http://localhost:8082/test  查看clientB 微服务消费配置中心修改后的值
