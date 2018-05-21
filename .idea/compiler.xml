@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="apiGateWay" />
+        <module name="configClientA" />
+        <module name="configClientB" />
+        <module name="configService" />
+        <module name="eurekaService" />
+        <module name="oauth2Customer" />
+        <module name="oauth2Service" />
+        <module name="serviceCustomerA" />
+        <module name="serviceCustomerB" />
+        <module name="serviceProducer" />
+        <module name="turbineService" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apiGateWay" target="1.8" />
+      <module name="configClientA" target="1.8" />
+      <module name="configClientB" target="1.8" />
+      <module name="configService" target="1.8" />
+      <module name="eurekaService" target="1.8" />
+      <module name="oauth2Customer" target="1.8" />
+      <module name="oauth2Service" target="1.8" />
+      <module name="serviceCustomerA" target="1.8" />
+      <module name="serviceCustomerB" target="1.8" />
+      <module name="serviceProducer" target="1.8" />
+      <module name="springCloud" target="1.8" />
+      <module name="turbineService" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
