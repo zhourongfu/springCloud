@@ -8,8 +8,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 /**
  * Created by liutq on 2018/5/21.
  */
-@Configuration
-@EnableResourceServer
+//@Configuration
+//@EnableResourceServer
 public class RSSConfig extends ResourceServerConfigurerAdapter {
         @Override
         public void configure(HttpSecurity http) throws Exception {
