@@ -16,9 +16,12 @@ public class ClientApplication {
 
 
     @RequestMapping("/client")
-    public String home(Principal user) {
-        return "Hello " + user.getName();
+    public Principal home(Principal user)
+    {
+        return user;
     }
+
+
     @RequestMapping("/hello")
     public String hello() {
         return "Hello world!";
