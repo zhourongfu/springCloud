@@ -1,4 +1,4 @@
-
+debug: false
 
 security:
   oauth2:
@@ -7,6 +7,10 @@ security:
       client-secret: acmesecret
       scope: read,write
       auto-approve-scopes: '.*'
+      grant-type: password
+      access-token-validity-seconds: 60
+      refresh-token-validity-seconds: 360
+  ignored: /oauth/check_token
 
 spring:
   redis:
@@ -19,3 +23,9 @@ spring:
       min-idle: 0
       max-active: 8
       max-wait: -1
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
