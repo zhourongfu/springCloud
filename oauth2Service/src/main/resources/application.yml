@@ -1,15 +1,6 @@
 debug: false
 
 security:
-  oauth2:
-    client:
-      client-id: acme
-      client-secret: acmesecret
-      scope: read,write
-      auto-approve-scopes: '.*'
-      grant-type: password
-      access-token-validity-seconds: 60
-      refresh-token-validity-seconds: 360
   ignored: /oauth/check_token
 
 spring:
@@ -25,7 +16,24 @@ spring:
       max-wait: -1
   thymeleaf:
     cache: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.198.128:3306/test?Unicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: weilus
+    druid:
+      initial-size: 10
+      min-idle: 10
+      max-active: 100
+      max-wait: 6000
+      min-evictable-idle-time-millis: 300000
+      time-between-eviction-runs-millis: 60000
+
+mybatis:
+  typeAliasesPackage: com.weilus.dto,com.weilus.entity
+  mapperLocations: classpath*:mybatis/*Mapper.xml
 
 logging:
   level:
+    com.weilus: DEBUG
     org.springframework.security: DEBUG
