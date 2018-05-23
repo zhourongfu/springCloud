@@ -3,15 +3,16 @@
 <mapper namespace="com.weilus.dao.UserDao" >
 
 	  <resultMap type="UserEntity" id="rm_UserEntity">
-		<result column="username" property="username"/>
-		<result column="userpwd" property="password"/>
-		<result column="locked" property="locked"/>
-		<result column="enable" property="enable"/>
-		  <result column="accountExpired" property="accountExpired"/>
+		<result column="USERNAME" property="username"/>
+		<result column="USERPWD" property="password"/>
+		<result column="LOCKED" property="locked"/>
+		<result column="ENABLE" property="enable"/>
+		<result column="ACCOUNTEXPIRED" property="accountExpired"/>
 	  </resultMap>
 
 	 <select id="loadUserByUsername" resultMap="rm_UserEntity">
-		 SELECT username,userpwd,locked,enable,accountExpired FROM T_USER WHERE USERNAME=#{username}
+		 SELECT USERNAME,USERPWD,LOCKED,ENABLE,ACCOUNTEXPIRED
+		 FROM T_USER WHERE USERNAME=#{username}
 	 </select>
 
 </mapper>
