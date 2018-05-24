@@ -46,3 +46,22 @@
     turbineService 监控hystrix消费服务状况，消费者集群TEST-TURBINE
     访问 http://127.0.0.1:9101/hystrix
     输入监控流 http://127.0.0.1:9101/turbine.stream?cluster=TEST-TURBINE
+
+OAUTH2.0
+
+    a.密码模式
+    认证服务器oauth2Service密码认证 获取令牌
+    curl -d 'grant_type=password&client_id=acme&username=admin&password=weilus' \
+    http://acme:acmesecret@192.168.198.1:8080/oauth/token
+    结果示例：
+    {"access_token":"96ebd464-4ef0-4cbd-8079-a2260992a3cd","token_type":"bearer",
+    "refresh_token":"7593c109-810e-435e-8d11-137cc620deb6","expires_in":77,"scope":"read write"}
+
+    访问资源服务器，资源服务器会访问/oauth/check_token认证服务器检查令牌
+    curl http://192.168.100.1:9999/client?access_token=96ebd464-4ef0-4cbd-8079-a2260992a3cd
+
+    b.客户端模式
+    curl -d 'grant_type=client_credentials&client_id=sdfaesa&client_secret=aasdf5#%asdf' \
+    http://sdfaesa:aasdf5#%asdf@192.168.198.1:8080/oauth/token
+    结果示例:
+    {"access_token":"1c5692c3-d06e-48f5-aa71-0f2b55bec967","token_type":"bearer","expires_in":199,"scope":"read write"}

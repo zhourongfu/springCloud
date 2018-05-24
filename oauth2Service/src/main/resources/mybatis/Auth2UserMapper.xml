@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.weilus.dao.UserDao" >
+<mapper namespace="com.weilus.dao.Auth2UserDao" >
 
-	  <resultMap type="UserEntity" id="rm_UserEntity">
+	  <resultMap type="Auth2UserEntity" id="rm_Auth2UserEntity">
 		<result column="USERNAME" property="username"/>
 		<result column="USERPWD" property="password"/>
 		<result column="LOCKED" property="locked"/>
@@ -10,7 +10,7 @@
 		<result column="ACCOUNTEXPIRED" property="accountExpired"/>
 	  </resultMap>
 
-	 <select id="loadUserByUsername" resultMap="rm_UserEntity">
+	 <select id="loadUserByUsername" resultMap="rm_Auth2UserEntity">
 		 SELECT USERNAME,USERPWD,LOCKED,ENABLE,ACCOUNTEXPIRED
 		 FROM T_USER WHERE USERNAME=#{username}
 	 </select>

@@ -1,6 +1,6 @@
 package com.weilus.dao;
 
-import com.weilus.entity.UserEntity;
+import com.weilus.entity.Auth2UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
  */
 
 @Mapper
-public interface UserDao {
+public interface Auth2UserDao {
 
-    UserEntity loadUserByUsername(@Param("username") String username);
+    Auth2UserEntity loadUserByUsername(@Param("username") String username);
 
 }

@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * Created by liutq on 2018/5/23.
  */
-public class UserEntity implements UserDetails{
+public class Auth2UserEntity implements UserDetails{
 
     private String username;
     private String password;

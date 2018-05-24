@@ -1,7 +1,7 @@
 package com.weilus.service;
 
-import com.weilus.dao.UserDao;
-import com.weilus.entity.UserEntity;
+import com.weilus.dao.Auth2UserDao;
+import com.weilus.entity.Auth2UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ import org.springframework.stereotype.Service;
 public class Auth2UserService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(Auth2UserService.class);
     @Autowired
-    private UserDao userDao;
+    private Auth2UserDao userDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userDao.loadUserByUsername(username);
+        Auth2UserEntity user = userDao.loadUserByUsername(username);
         if(null != user)logger.info(user.toString());
         return user;
     }
