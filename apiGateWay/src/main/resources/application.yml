@@ -1,0 +1,19 @@
+server:
+  context-path: /
+  port: 8088
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:123456@localhost:8761/eureka/
+    registerWithEureka: false
+
+zuul:
+  routes:
+    serviceProducer:
+      serviceId: serviceProducer
+      path: /serviceProducer/**
+    uaa:
+      serviceId: uaa
+      path: /uaa/**
+  add-proxy-headers: true
+  sensitiveHeaders: Cookie,Set-Cookie
