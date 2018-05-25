@@ -5,9 +5,6 @@ server:
 
 security:
   oauth2:
-#    client:
-#      client-id: acme
-#      client-secret: acmesecret
     resource:
       id: oauth2-resource
       token-info-uri: http://localhost:8080/oauth/check_token

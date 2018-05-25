@@ -1,8 +1,13 @@
 debug: false
 server:
   port: 8080
-#security:
-#  ignored: /oauth/check_token,/oauth/token
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-uri:
+
+  ignored: /oauth/check_token
 
 eureka:
   client:

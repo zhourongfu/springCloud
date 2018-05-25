@@ -12,15 +12,8 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by liutq on 2018/5/23.
@@ -29,6 +22,7 @@ import java.util.Map;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerConfig.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -37,6 +31,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private Auth2UserService auth2UserService;
     @Autowired
     private Auth2ClientService auth2ClientService;
+
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -49,40 +44,34 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setClientDetailsService(auth2ClientService);
         tokenServices.setAuthenticationManager(authenticationManager);
         endpoints.tokenServices(tokenServices);
-        endpoints.addInterceptor(new HandlerInterceptor() {
-            @Override
-            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                Enumeration<String> e = request.getHeaderNames();
-                Map<String,String> headers = new HashMap<>();
-                while (e.hasMoreElements()){
-                    String headerName = e.nextElement();
-                    headers.put(headerName,request.getHeader(headerName));
-                }
-                logger.info(headers.toString());
-                return true;
-            }
 
-            @Override
-            public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
-            }
-
-            @Override
-            public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-                Enumeration<String> e = request.getHeaderNames();
-                Map<String,String> headers = new HashMap<>();
-                while (e.hasMoreElements()){
-                    String headerName = e.nextElement();
-                    headers.put(headerName,request.getHeader(headerName));
-                }
-                logger.info(headers.toString());
-            }
-        });
+//        endpoints.authenticationManager(authenticationManager);
+//        endpoints.userDetailsService(auth2UserService);
+//        endpoints.accessTokenConverter(jwtAccessTokenConverter);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(auth2ClientService);
     }
-
+//    @Autowired
+//    private JwtAccessTokenConverter jwtAccessTokenConverter;
+//    @Primary
+//    @Bean("jwtAccessTokenConverter")
+//    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+//        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter(){
+//            @Override
+//            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+//                String username = authentication.getUserAuthentication().getName();
+//                ((DefaultOAuth2AccessToken)accessToken).setAdditionalInformation(Collections.singletonMap("username",username));
+//                return super.enhance(accessToken, authentication);
+//            }
+//        };
+//        //java keytool工具生成keystore文件:
+//        //keytool -genkey -alias admin -keysize 2048 -keyalg RSA -keystore D:\\test.jks
+//        KeyPair keyPair = new KeyStoreKeyFactory(new ClassPathResource("test.jks"),"weilus".toCharArray()).getKeyPair("admin");
+//        //String publicKey = new String(Base64.encodeBase64(keyPair.getPublic().getEncoded()));
+//        jwtAccessTokenConverter.setKeyPair(keyPair);
+//        return jwtAccessTokenConverter;
+//    }
 }

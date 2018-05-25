@@ -7,6 +7,12 @@ eureka:
       defaultZone: http://eureka:123456@localhost:8761/eureka/
     registerWithEureka: false
 
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token
+  ignored: /uaa/oauth/token
+  enable-csrf: false
 zuul:
   routes:
     serviceProducer:
@@ -15,5 +21,10 @@ zuul:
     uaa:
       serviceId: uaa
       path: /uaa/**
-  add-proxy-headers: true
-  sensitiveHeaders: Cookie,Set-Cookie
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    com.weilus: DEBUG
+    org.springframework.security: DEBUG
