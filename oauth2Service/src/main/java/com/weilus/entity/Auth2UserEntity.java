@@ -1,5 +1,6 @@
 package com.weilus.entity;
 
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class Auth2UserEntity implements UserDetails{
     private Long id;
     private String username;
-    private String password;
+    private String userpwd;
     private Integer locked; //0=nonlock 1=locked 账号是否锁定
     private Integer enable; //0=enable  1=disable 账号是否有效
     private Integer accountExpired; //0=nonExpired 1=expired  账号是否过期
@@ -31,8 +32,9 @@ public class Auth2UserEntity implements UserDetails{
         this.username = username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+
+    public void setUserpwd(String userpwd) {
+        this.userpwd = userpwd;
     }
 
     @Override
@@ -42,7 +44,11 @@ public class Auth2UserEntity implements UserDetails{
 
     @Override
     public String getPassword() {
-        return password;
+        return userpwd;
+    }
+
+    public String getUserpwd() {
+        return userpwd;
     }
 
     @Override
@@ -103,13 +109,13 @@ public class Auth2UserEntity implements UserDetails{
         return "Auth2UserEntity{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", userpwd='" + userpwd + '\'' +
                 ", locked=" + locked +
                 ", enable=" + enable +
                 ", accountExpired=" + accountExpired +
+                ", authorities=" + authorities +
                 '}';
     }
-
 
 
 }

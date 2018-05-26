@@ -9,8 +9,8 @@ import java.util.*;
 /**
  * Created by liutq on 2018/5/23.
  */
-public class Auth2ClientDetailsEntity implements ClientDetails {
-
+public class Auth2ClientEntity implements ClientDetails {
+    private Integer id;
     private String clientId;
     private String clientSecret;
     private Integer accessTokenValiditySeconds;
@@ -156,5 +156,13 @@ public class Auth2ClientDetailsEntity implements ClientDetails {
     @Override
     public Map<String, Object> getAdditionalInformation() {
         return Collections.unmodifiableMap(this.additionalInformation);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

@@ -32,4 +32,13 @@ public class Auth2RoleEntity implements GrantedAuthority {
     public String getAuthority() {
         return authority;
     }
+
+    @Override
+    public String toString() {
+        return "Auth2RoleEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", authority='" + authority + '\'' +
+                '}';
+    }
 }

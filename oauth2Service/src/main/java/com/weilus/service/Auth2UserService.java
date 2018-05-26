@@ -35,6 +35,7 @@ public class Auth2UserService implements UserDetailsService {
         }
         List<Auth2RoleEntity> roles = auth2RoleDao.loadByUserId(user.getId());
         user.setAuthorities(roles);
+        System.err.println(user);
         return user;
     }
 }
