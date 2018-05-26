@@ -7,6 +7,12 @@ ENABLE int(1) default 0,
 ACCOUNTEXPIRED int(1) default 0
 );
 
+create table T_ROLE(
+id int(11) not null primary key auto_increment,
+user_id int(11),
+authority varchar(50)
+);
+
 create table T_AUTH2_CLIENT(
 ID int(11) not null primary key auto_increment,
 CLIENT_ID varchar(50),

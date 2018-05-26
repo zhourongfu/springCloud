@@ -4,17 +4,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by liutq on 2018/5/23.
  */
 public class Auth2UserEntity implements UserDetails{
-
+    private Long id;
     private String username;
     private String password;
     private Integer locked; //0=nonlock 1=locked 账号是否锁定
     private Integer enable; //0=enable  1=disable 账号是否有效
     private Integer accountExpired; //0=nonExpired 1=expired  账号是否过期
+
+    private List<Auth2RoleEntity> authorities;
 
     public Integer getLocked() {
         return locked;
@@ -34,7 +37,7 @@ public class Auth2UserEntity implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
@@ -83,15 +86,30 @@ public class Auth2UserEntity implements UserDetails{
         this.accountExpired = accountExpired;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAuthorities(List<Auth2RoleEntity> authorities) {
+        this.authorities = authorities;
+    }
 
     @Override
     public String toString() {
-        return "UserEntity{" +
-                "username='" + username + '\'' +
+        return "Auth2UserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", locked=" + locked +
                 ", enable=" + enable +
                 ", accountExpired=" + accountExpired +
                 '}';
     }
+
+
+
 }
