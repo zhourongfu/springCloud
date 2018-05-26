@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.nio.charset.Charset;
 /**
  * Created by liutq on 2018/5/25.
  */
+@Component
 public class FallBackFilter implements ZuulFallbackProvider {
     @Override
     public String getRoute() {
@@ -45,7 +47,7 @@ public class FallBackFilter implements ZuulFallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("微服务不可用".getBytes());
+                return new ByteArrayInputStream("{\"msg\":\"服务不可用\"}".getBytes());
             }
 
             @Override
