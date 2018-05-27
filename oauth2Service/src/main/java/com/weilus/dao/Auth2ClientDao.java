@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
  */
 @Mapper
 public interface Auth2ClientDao {
-    @Select("SELECT client_id,client_secret,scopes,grant_types,access_token_validity_seconds,refresh_token_validity_seconds " +
+    @Select("SELECT id,client_id,client_secret,scopes,grant_types,access_token_validity_seconds,refresh_token_validity_seconds " +
             "FROM T_AUTH2_CLIENT WHERE client_id=#{clientId}")
     Auth2ClientEntity loadClientByClientId(@Param("clientId") String clientId);
 }

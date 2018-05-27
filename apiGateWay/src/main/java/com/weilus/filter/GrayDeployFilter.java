@@ -11,6 +11,7 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 
 @Component
 public class GrayDeployFilter extends ZuulFilter {
+    public static final String GRAY = "gray";
     @Override
     public String filterType() {
         return PRE_TYPE;
@@ -30,11 +31,13 @@ public class GrayDeployFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        if ("dev".equals(request.getParameter("gray"))) {
-            RibbonFilterContextHolder.getCurrentContext().add("gray", "dev");
+        String gray = request.getHeader(GRAY);
+        System.err.println(GRAY+"===>"+gray);
+        if ("dev".equals(gray)) {
+            RibbonFilterContextHolder.getCurrentContext().add(GRAY, "dev");
         }
         else {
-            RibbonFilterContextHolder.getCurrentContext().add("gray", "test");
+            RibbonFilterContextHolder.getCurrentContext().add(GRAY, "test");
         }
         return null;
     }

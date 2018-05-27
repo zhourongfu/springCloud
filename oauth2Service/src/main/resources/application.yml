@@ -2,11 +2,6 @@ debug: false
 server:
   port: 8080
 security:
-  oauth2:
-    resource:
-      jwt:
-        key-uri:
-
   ignored: /oauth/check_token
 
 eureka:
@@ -18,7 +13,9 @@ eureka:
     lease-expiration-duration-in-seconds: 10
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
-
+    metadata-map:
+      cluster: TEST-TURBINE
+      gray: dev
 spring:
   application:
     name: uaa
@@ -35,7 +32,7 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.100.2:3306/test?Unicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: weilus
@@ -57,4 +54,4 @@ logging:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     com.weilus: DEBUG
-    org.springframework.security: DEBUG
+    org.springframework.security: INFO
