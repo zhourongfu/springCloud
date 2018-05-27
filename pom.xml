@@ -15,17 +15,19 @@
   </properties>
   <modules>
   		<module>eurekaService</module>
+	  	<module>apiGateWay</module>
   		<module>configService</module>
-  		<module>configClientA</module>
+
+	  	<module>oauth2Service</module>
+	  	<module>configClientA</module>
   		<module>configClientB</module>
 	  	<module>serviceCustomerA</module>
 	    <module>serviceCustomerB</module>
   		<module>serviceProducer</module>
-  		<module>apiGateWay</module>
+
 	    <module>turbineService</module>
 
-	  	<module>oauth2Service</module>
-	  	<module>oauth2Customer</module>
+
   </modules>
 		
 	<dependencyManagement>

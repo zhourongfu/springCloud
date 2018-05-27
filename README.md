@@ -93,3 +93,23 @@
         http://sdfaesa:aasdf5#%asdf@192.168.198.1:8080/oauth/token
     结果示例:
         {"access_token":"1c5692c3-d06e-48f5-aa71-0f2b55bec967","token_type":"bearer","expires_in":199,"scope":"read write"}
+        
+### 微服务灰度发布
+
+    启动eureka apiGateWay CustomerA CustomerB
+        curl http://localhost:8088/serviceCustomer/testGrayDeploy?gray=test
+            {"result":"ServiceB called!"}  
+        curl http://localhost:8088/serviceCustomer/testGrayDeploy?gray=dev 
+            {"result":"ServiceA called!"}
+    发布前设置：eureka.instance.metadata-map.gray=dev 
+    如此不影响测试环境正常使用，进行线上调试
+
+### Zuul网关作用
+
+>1 token校验
+
+>2 灰度发布
+
+>3 安全访问。外部调用微服务，内部调用互授安全端口
+
+>4 微服务负载
