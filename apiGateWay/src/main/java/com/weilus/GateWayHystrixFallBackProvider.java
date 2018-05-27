@@ -1,4 +1,4 @@
-package com.weilus.filter;
+package com.weilus;
 
 import org.springframework.cloud.netflix.zuul.filters.route.ZuulFallbackProvider;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
  * Created by liutq on 2018/5/25.
  */
 @Component
-public class FallBackFilter implements ZuulFallbackProvider {
+public class GateWayHystrixFallBackProvider implements ZuulFallbackProvider {
     @Override
     public String getRoute() {
         return "*";

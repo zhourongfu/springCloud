@@ -11,12 +11,15 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
+
 @Component
-public class AccessFilter extends ZuulFilter {
-    private static final Logger logger = LoggerFactory.getLogger(AccessFilter.class);
+public class AccessTokenFilter extends ZuulFilter {
+    private static final Logger logger = LoggerFactory.getLogger(AccessTokenFilter.class);
     @Override
     public String filterType() {
-        return "pre";
+        return PRE_TYPE;
     }
 
     @Override
@@ -33,12 +36,12 @@ public class AccessFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        Principal user = request.getUserPrincipal();
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        if (user != null){
-            System.err.println("==============>"+user.getName()+"<================");
+        if (a != null){
+            System.err.println(a);
+            System.err.println("==============>"+a.getName()+"<================");
+            ctx.addZuulRequestHeader("X-AUTH-ID",a.getPrincipal().toString());
         }
-        System.err.println(a);
         return null;
     }
 }

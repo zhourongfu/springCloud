@@ -24,5 +24,10 @@ public class CustomerFeignController {
 		return service.sayHello(params);
 		else return service.hiMan(params);
 	}
-	
+
+
+	@RequestMapping("testGrayDeploy")
+	public Object testGrayDeploy(String s){
+		return Collections.singletonMap("result","ServiceA called!");
+	}
 }

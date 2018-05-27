@@ -1,0 +1,29 @@
+server:
+  context-path: /
+  port: 8081
+spring:
+  application:
+    name: serviceCustomer
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:123456@localhost:8761/eureka/
+
+  instance:
+    metadata-map:
+      cluster: TEST-TURBINE
+      gray: dev
+feign:
+  hystrix:
+    enabled: true
+    threadpool:
+      serviceProducer:
+        coreSize: 20
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

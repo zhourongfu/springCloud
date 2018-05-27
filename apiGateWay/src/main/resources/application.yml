@@ -21,6 +21,9 @@ zuul:
     uaa:
       serviceId: uaa
       path: /uaa/**
+    serviceCustomer:
+      serviceId: serviceCustomer
+      path: /serviceCustomer/**
   sensitive-headers: Cookie,Set-Cookie
 logging:
   pattern:

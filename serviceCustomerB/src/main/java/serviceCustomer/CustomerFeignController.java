@@ -20,5 +20,9 @@ public class CustomerFeignController {
 		Map<String,String> params = Collections.singletonMap("name", "jhon");
 		return service.sayHello(params);
 	}
-	
+
+	@RequestMapping("testGrayDeploy")
+	public Object testGrayDeploy(String s){
+		return Collections.singletonMap("result","ServiceB called!");
+	}
 }
