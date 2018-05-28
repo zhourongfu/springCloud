@@ -1,21 +1,23 @@
 server:
-  port: 9101
-  context-path: /
-
+    port: 8761
 eureka:
   client:
-    service-url:
-      defaultZone: http://eureka:123456@localhost:8761/eureka/
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 600
 
-spring:
-  application:
-    name: turbineService
+security:
+  user:
+    name: eureka
+    password: 123456
 
-turbine:
-  appConfig: serviceCustomer
-  aggregator:
-    clusterConfig: TEST-TURBINE
-  clusterNameExpression: metadata['cluster']
+
+endpoints:
+  restart:
+    enabled: false
+
 
 logging:
   pattern:
@@ -25,3 +27,6 @@ logging:
     com.netflix.eureka: OFF
     com.netflix.discovery: OFF
     org.springframework.security: DEBUG
+
+
+

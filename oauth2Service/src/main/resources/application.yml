@@ -16,6 +16,7 @@ eureka:
     metadata-map:
       cluster: TEST-TURBINE
       gray: dev
+
 spring:
   application:
     name: uaa
@@ -49,9 +50,12 @@ mybatis:
   mapperLocations: classpath*:mybatis/*Mapper.xml
   configuration:
     map-underscore-to-camel-case: true
+
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     com.weilus: DEBUG
-    org.springframework.security: INFO
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
+    org.springframework.security: DEBUG
