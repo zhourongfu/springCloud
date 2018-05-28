@@ -11,9 +11,9 @@ import java.util.Collections;
 @RefreshScope // 使用该注解的类，会在接到SpringCloud配置中心配置刷新的时候，自动将新的配置更新到该类对应的字段中。
 public class ConfigClientController {
 	
-	@Value("${ltaiq.name}")
+	@Value("${ltaiq.name:刘德华}")
 	private String name;
-	@Value("${ltaiq.age}")
+	@Value("${ltaiq.age:50}")
 	private int age;
 
 

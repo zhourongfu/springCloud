@@ -58,4 +58,4 @@ logging:
     com.weilus: DEBUG
     com.netflix.eureka: OFF
     com.netflix.discovery: OFF
-    org.springframework.security: DEBUG
+    org.springframework.security: INFO

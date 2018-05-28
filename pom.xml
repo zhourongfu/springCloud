@@ -20,7 +20,6 @@
 
 	  	<module>oauth2Service</module>
 	  	<module>configClientA</module>
-  		<module>configClientB</module>
 	  	<module>serviceCustomerA</module>
 	    <module>serviceCustomerB</module>
   		<module>serviceProducer</module>
