@@ -5,7 +5,7 @@ spring:
     password: guest
   redis:
     database: 0
-    host: 192.168.198.128
+    host-name: 192.168.198.128
     password:
     port: 6379
     pool:

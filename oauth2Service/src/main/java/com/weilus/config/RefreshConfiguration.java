@@ -1,6 +1,7 @@
 package com.weilus.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.StringUtils;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.sql.DataSource;
@@ -18,32 +20,30 @@ import javax.sql.DataSource;
  * Created by liutq on 2018/6/7.
  */
 @Configuration
+@RefreshScope
 public class RefreshConfiguration {
 
-
-//    @Bean
-//    @Primary
-//    @RefreshScope
-//    @ConfigurationProperties(prefix = "spring.redis.pool")
-//    public JedisPoolConfig jedisPoolConfig(){
-//        return new JedisPoolConfig();
-//    }
+    @Value("${spring.redis.pool.max-idle:8}")
+    private int maxIdle;
+    @Value("${spring.redis.pool.min-idle:0}")
+    private int minIdle;
+    @Value("${spring.redis.pool.max-active:8}")
+    private int maxActive;
+    @Value("${spring.redis.pool.max-wait:-1}")
+    private int maxWait;
 
     @Bean
     @Primary
     @RefreshScope
     @ConfigurationProperties(prefix = "spring.redis")
     public JedisConnectionFactory jedisConnectionFactory(){
-        JedisPoolConfig cofnig  = new JedisPoolConfig();
-        cofnig.setMaxWaitMillis(20000L);
-        return new JedisConnectionFactory(cofnig);
-    }
-
-    @Bean
-    public RedisTemplate<String,Object> configRedisTemplate1(JedisConnectionFactory factory){
-        final RedisTemplate<String,Object> template = new RedisTemplate<String,Object>();
-        template.setConnectionFactory(factory);
-        return template;
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxIdle(maxIdle);
+        poolConfig.setMinIdle(minIdle);
+        poolConfig.setMaxWaitMillis(maxWait);
+        poolConfig.setMaxTotal(maxActive);
+        JedisConnectionFactory factory = new JedisConnectionFactory(poolConfig);
+        return factory;
     }
 
     @Bean
@@ -54,12 +54,12 @@ public class RefreshConfiguration {
         return new DruidDataSource();
     }
 
-    @Bean
-    @Primary
-    @RefreshScope
-    @ConfigurationProperties(prefix = "spring.rabbitmq")
-    public RabbitProperties rabbitProperties() {
-        return new RabbitProperties();
-    }
+//    @Bean
+//    @Primary
+//    @RefreshScope
+//    @ConfigurationProperties(prefix = "spring.rabbitmq")
+//    public RabbitProperties rabbitProperties() {
+//        return new RabbitProperties();
+//    }
 
 }
