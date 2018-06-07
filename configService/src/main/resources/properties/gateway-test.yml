@@ -1,0 +1,24 @@
+server:
+  port: 8088
+
+spring:
+  rabbitmq:
+    addresses: 192.168.198.128:5672
+    username: guest
+    password: guest
+
+security:
+  ignored: /uaa/oauth/token
+  enable-csrf: false
+zuul:
+  routes:
+    serviceProducer:
+      serviceId: serviceProducer
+      path: /serviceProducer/**
+    uaa:
+      serviceId: uaa
+      path: /uaa/**
+    serviceCustomer:
+      serviceId: serviceCustomer
+      path: /serviceCustomer/**
+  sensitive-headers: Cookie,Set-Cookie

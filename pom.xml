@@ -19,7 +19,6 @@
   		<module>configService</module>
 
 	  	<module>oauth2Service</module>
-	  	<module>configClientA</module>
 	  	<module>serviceCustomerA</module>
 	    <module>serviceCustomerB</module>
   		<module>serviceProducer</module>

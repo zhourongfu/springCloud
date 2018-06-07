@@ -1,9 +1,3 @@
-debug: false
-server:
-  port: 8080
-security:
-  ignored: /oauth/check_token
-
 eureka:
   client:
     serviceUrl:
@@ -18,38 +12,22 @@ eureka:
       gray: dev
 
 spring:
+  profiles:
+    active: test
   application:
     name: uaa
-  redis:
-    database: 0
-    host: 192.168.100.2
-    password:
-    port: 6379
-    pool:
-      max-idle: 8
-      min-idle: 0
-      max-active: 8
-      max-wait: -1
-  thymeleaf:
-    cache: false
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.100.2:3306/test?Unicode=true&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: weilus
-    druid:
-      initial-size: 10
-      min-idle: 10
-      max-active: 100
-      max-wait: 6000
-      min-evictable-idle-time-millis: 300000
-      time-between-eviction-runs-millis: 60000
-
-mybatis:
-  typeAliasesPackage: com.weilus.dto,com.weilus.entity
-  mapperLocations: classpath*:mybatis/*Mapper.xml
-  configuration:
-    map-underscore-to-camel-case: true
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        enabled: true
+        service-id: configService
+      username: config
+      password: cf123456
+      profile: ${spring.profiles.active}
+    bus:
+      trace:
+        enabled: true
 
 logging:
   pattern:
