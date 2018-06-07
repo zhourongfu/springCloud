@@ -1,7 +1,3 @@
-debug: false
-server:
-  port: 8090
-
 spring:
   rabbitmq:
     addresses: 192.168.198.128:5672
@@ -9,26 +5,8 @@ spring:
     password: guest
 
 security:
-  basic: 
-    path: /sayHello,/hiMan
   user:
     name: fadffsedfsf
     password: rrfdaDSFfesnmhf
 
-endpoints:
-  autoconfig.enabled: false
-  beans.enabled: false
-  configprops.enabled: true
-  dump.enabled: false
-  env.enabled: false
-  metrics.enabled: false
-  mappings.enabled: false
-  shutdown.enabled: false
-  trace.enabled: false
-  heapdump.enabled: false
-  restart.enabled: false
-  auditevents.enabled: false
-  loggers.enabled: false
-  features.enabled: false
-  env.post.enabled: false
-  pause.enabled: false
+

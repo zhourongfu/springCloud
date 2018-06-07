@@ -1,0 +1,35 @@
+debug: false
+server:
+  port: 8090
+
+security:
+  basic:
+    path: /sayHello,/hiMan
+
+endpoints:
+  autoconfig.enabled: false
+  beans.enabled: false
+  configprops.enabled: true
+  dump.enabled: false
+  env.enabled: false
+  metrics.enabled: false
+  mappings.enabled: false
+  shutdown.enabled: false
+  trace.enabled: false
+  heapdump.enabled: false
+  restart.enabled: false
+  auditevents.enabled: false
+  loggers.enabled: false
+  features.enabled: false
+  env.post.enabled: false
+  pause.enabled: false
+
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    com.weilus: DEBUG
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
+    org.springframework.security: INFO

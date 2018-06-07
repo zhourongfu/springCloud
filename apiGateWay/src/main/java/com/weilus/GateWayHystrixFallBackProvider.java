@@ -53,7 +53,7 @@ public class GateWayHystrixFallBackProvider implements ZuulFallbackProvider {
             @Override
             public HttpHeaders getHeaders() {
                 HttpHeaders headers = new HttpHeaders();
-                MediaType mt = new MediaType("application", "json", Charset.forName("UTF-8"));
+                MediaType mt = new MediaType("application.yml", "json", Charset.forName("UTF-8"));
                 headers.setContentType(mt);
                 return headers;
             }

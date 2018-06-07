@@ -28,12 +28,3 @@ spring:
     bus:
       trace:
         enabled: true
-
-logging:
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
-  level:
-    com.weilus: DEBUG
-    com.netflix.eureka: OFF
-    com.netflix.discovery: OFF
-    org.springframework.security: INFO

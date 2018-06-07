@@ -4,4 +4,4 @@ VALUES
 (2, 'sdfaesa','aasdf5#%asdf','read,write', 'client_credentials,refresh_token',200, 4000);
 
 INSERT INTO T_USER(ID,USERNAME,USERPWD,LOCKED,ENABLE,ACCOUNTEXPIRED)
- VALUES (1, 'admin', '9193f770b2ee0e760e11752483359000', 0, 0, 0);
+ VALUES (1, 'admin', 'weilus', 0, 0, 0);

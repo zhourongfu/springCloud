@@ -1,35 +1,24 @@
+debug: false
 server:
-  port: 8761
+  port: 8080
+security:
+  ignored: /oauth/check_token
 
 spring:
-  application:
-    name: eureka
+  thymeleaf:
+    cache: false
 
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-  server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 600
-
-security:
-  user:
-    name: eureka
-    password: 123456
-
-endpoints:
-  restart:
-    enabled: false
+mybatis:
+  typeAliasesPackage: com.weilus.dto,com.weilus.entity
+  mapperLocations: classpath*:mybatis/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     com.weilus: DEBUG
-    com.netflix.eureka: ERROR
+    com.netflix.discovery: ERROR
     org.springframework: INFO
-
-
-
-
+    org.apache.ibatis: INFO
