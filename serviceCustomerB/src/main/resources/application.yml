@@ -1,7 +1,9 @@
 server:
   port: 8081
 
-
+feign:
+  hystrix:
+    enabled: true
 
 
 logging:

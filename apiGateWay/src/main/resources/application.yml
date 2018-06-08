@@ -3,6 +3,4 @@ server:
 security:
   ignored: /uaa/oauth/token
   enable-csrf: false
-zuul:
-  routes:
 
