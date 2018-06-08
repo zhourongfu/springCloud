@@ -2,10 +2,6 @@ debug: false
 server:
   port: 8090
 
-security:
-  basic:
-    path: /sayHello,/hiMan
-
 endpoints:
   autoconfig.enabled: false
   beans.enabled: false

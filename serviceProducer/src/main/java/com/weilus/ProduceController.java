@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Map;
 
 /**
@@ -27,7 +28,9 @@ public class ProduceController {
         log.info("sayHello服务被消费。。。。。。。。。。。。。。。");
         return "hello"+map.get("name");
     }
+
     @RequestMapping(value="hiMan",method=RequestMethod.POST)
+    @RolesAllowed("CLIENT_A")
     public String hiMan(@RequestBody Map<String,String> map){
         log.info("hiMan服务被消费。。。。。。。。。。。。。。。");
         return "hello"+map.get("name");

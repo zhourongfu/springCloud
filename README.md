@@ -42,7 +42,7 @@ curl -H 'gray:dev' http://192.168.198.1:8088/serviceCustomer/test
 ```
 ```
 1.变更zuul网关配置gateway-test.yml,使serviceCustomer服务可用,并刷新配置生效
-    curl -X POST http://config:cf123456@192.168.198.1:7000/bus/refresh
+    curl -X POST http://config:cf123456@192.168.198.1:7000/bus/refresh?destination=gateway:**
 2.再次通过网关访问微服务
     curl -H 'gray:dev' http://192.168.198.1:8088/serviceCustomer/test
     hello, local hi Man

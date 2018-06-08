@@ -8,5 +8,7 @@ security:
   user:
     name: fadffsedfsf
     password: rrfdaDSFfesnmhf
-
+    role: CLIENT_A,CLIENT_B
+  basic:
+    path: /sayHello,/hiMan
 
