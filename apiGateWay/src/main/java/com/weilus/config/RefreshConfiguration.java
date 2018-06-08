@@ -1,6 +1,5 @@
 package com.weilus.config;
 
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
@@ -14,14 +13,6 @@ import org.springframework.context.annotation.Primary;
  */
 @Configuration
 public class RefreshConfiguration {
-
-    @Bean
-    @Primary
-    @RefreshScope
-    @ConfigurationProperties(prefix = "spring.rabbitmq")
-    public RabbitProperties rabbitProperties() {
-        return new RabbitProperties();
-    }
 
     @Bean
     @Primary

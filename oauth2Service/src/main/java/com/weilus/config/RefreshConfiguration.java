@@ -2,15 +2,12 @@ package com.weilus.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.util.StringUtils;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.sql.DataSource;
@@ -53,13 +50,5 @@ public class RefreshConfiguration {
     public DataSource dataSource(){
         return new DruidDataSource();
     }
-
-//    @Bean
-//    @Primary
-//    @RefreshScope
-//    @ConfigurationProperties(prefix = "spring.rabbitmq")
-//    public RabbitProperties rabbitProperties() {
-//        return new RabbitProperties();
-//    }
 
 }
