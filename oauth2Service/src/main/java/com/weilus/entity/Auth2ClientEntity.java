@@ -17,7 +17,7 @@ public class Auth2ClientEntity implements ClientDetails {
     private Integer refreshTokenValiditySeconds;
     private String grantTypes;
     private String scopes;
-
+    private String roles;
 
 
     private Set<String> authorizedGrantTypes = Collections.emptySet();
@@ -137,6 +137,21 @@ public class Auth2ClientEntity implements ClientDetails {
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
+        if (StringUtils.hasText(roles)) {
+            Set<String> roleList = StringUtils.commaDelimitedListToSet(roles);
+            if (!roleList.isEmpty()) {
+                List<GrantedAuthority> arr= new ArrayList<>();
+                roleList.forEach((r)->{
+                    arr.add(new GrantedAuthority(){
+                        @Override
+                        public String getAuthority() {
+                            return r;
+                        }
+                    });
+                });
+                return arr;
+            }
+        }
         return authorities;
     }
 
@@ -164,5 +179,13 @@ public class Auth2ClientEntity implements ClientDetails {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }
