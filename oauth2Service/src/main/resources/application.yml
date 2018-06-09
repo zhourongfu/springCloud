@@ -2,7 +2,42 @@ debug: false
 server:
   port: 8080
 security:
-  ignored: /oauth/check_token
+  basic:
+    enabled: false
+  oauth2:
+    authorization:
+      token-key-access: permitAll()
+      check-token-access: isAuthenticated()
+    sso:
+      login-path: /login
+uaa:
+  oauth2:
+    password-client:
+      client-id: acme
+      client-secret:  acmesecret
+      roles: USER_ADD
+      authorized-grant-types: password,refresh_token
+      scope: user_info
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 7200
+    authorization-client:
+      client-id: a10086
+      client-secret: aabcc
+      roles: AUTHORI_CLIENT_ADD
+      authorized-grant-types: authorization_code,refresh_token
+      scope: user_info,base_info
+      auto-approve-scopes: base_info
+      registered-redirect-uri: http://aa.ccdd
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 7200
+    credentials-client:
+      client-id: ccdit
+      client-secret: ccditsec
+      roles: CLIENT_CREDENTIALS_ADD
+      authorized-grant-types: client_credentials,refresh_token
+      scope: read,write
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 7200
 
 spring:
   thymeleaf:
