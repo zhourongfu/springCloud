@@ -13,6 +13,12 @@ user_id int(11),
 authority varchar(50)
 );
 
+-- 存储 授权码
+CREATE TABLE OAUTH_CODE (
+  code varchar(50) NOT NULL PRIMARY KEY,
+  authentication blob
+);
+
 create table T_AUTH2_CLIENT(
 ID int(11) not null primary key auto_increment,
 CLIENT_ID varchar(50),

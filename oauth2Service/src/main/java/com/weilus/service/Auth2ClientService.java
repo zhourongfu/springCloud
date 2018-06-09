@@ -94,7 +94,7 @@ public class Auth2ClientService implements ClientDetailsService {
         for (Oauth2ClientProperties.Oauth2Client c:properties.getClients()) {
             if(c.getClientId().equals(clientId))return c;
         }
-        return null;
+        throw new ClientRegistrationException("invalid clientId :"+clientId);
 //        return getById(clientId);
     }
 
