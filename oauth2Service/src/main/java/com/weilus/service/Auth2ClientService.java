@@ -91,14 +91,10 @@ public class Auth2ClientService implements ClientDetailsService {
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         ClientDetails result=null;
-        if(properties.getAuthorizationClient().getClientId().equals(clientId))
-            result = properties.getAuthorizationClient();
-        else if(properties.getPasswordClient().getClientId().equals(clientId))
-            result = properties.getPasswordClient();
-        else if(properties.getCredentialsClient().getClientId().equals(clientId))
-            result = properties.getCredentialsClient();
-        return result;
-
+        for (Oauth2ClientProperties.Oauth2Client c:properties.getClients()) {
+            if(c.getClientId().equals(clientId))return c;
+        }
+        return null;
 //        return getById(clientId);
     }
 

@@ -25,3 +25,31 @@ spring:
       max-wait: 6000
       min-evictable-idle-time-millis: 300000
       time-between-eviction-runs-millis: 60000
+uaa:
+  oauth2:
+    clients[0]:
+      client-id: acme
+      client-secret:  acmesecret
+      roles: USER_ADD
+      authorized-grant-types: password,refresh_token
+      scope: user_info
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 7200
+    clients[1]:
+      client-id: a10086
+      client-secret: aabcc
+      roles: AUTHORI_CLIENT_ADD
+      authorized-grant-types: authorization_code,refresh_token
+      scope: user_info,base_info
+      auto-approve-scopes: base_info
+      registered-redirect-uri: http://aa.ccdd
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 7200
+    clients[2]:
+      client-id: ccdit
+      client-secret: ccditsec
+      roles: CLIENT_CREDENTIALS_ADD
+      authorized-grant-types: client_credentials,refresh_token
+      scope: read,write
+      access-token-validity-seconds: 3600
+      refresh-token-validity-seconds: 7200

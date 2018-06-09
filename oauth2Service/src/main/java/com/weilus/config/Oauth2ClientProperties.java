@@ -17,41 +17,16 @@ import java.util.*;
 public class Oauth2ClientProperties {
 
     /**
-     * 密码模式 认证服务配置
+     * 认证服务器 秘钥相关配置
      */
-    private Oauth2Client passwordClient;
-    /**
-     * 授权码模式 认证服务配置
-     */
-    private Oauth2Client authorizationClient;
-    /**
-     * 客户端模式 认证服务配置
-     */
-    private Oauth2Client credentialsClient;
+    private Oauth2Client[] clients;
 
-
-    public Oauth2Client getPasswordClient() {
-        return passwordClient;
+    public Oauth2Client[] getClients() {
+        return clients;
     }
 
-    public void setPasswordClient(Oauth2Client passwordClient) {
-        this.passwordClient = passwordClient;
-    }
-
-    public Oauth2Client getAuthorizationClient() {
-        return authorizationClient;
-    }
-
-    public void setAuthorizationClient(Oauth2Client authorizationClient) {
-        this.authorizationClient = authorizationClient;
-    }
-
-    public Oauth2Client getCredentialsClient() {
-        return credentialsClient;
-    }
-
-    public void setCredentialsClient(Oauth2Client credentialsClient) {
-        this.credentialsClient = credentialsClient;
+    public void setClients(Oauth2Client[] clients) {
+        this.clients = clients;
     }
 
     public static class Oauth2Client extends BaseClientDetails{
