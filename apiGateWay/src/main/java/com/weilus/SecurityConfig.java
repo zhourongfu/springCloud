@@ -34,7 +34,7 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
         http
             .authorizeRequests().antMatchers("/serviceCustomer/**").permitAll()
             .and()
-            .authorizeRequests().antMatchers(HttpMethod.GET, "/hello","/uaa/test").authenticated();
+            .authorizeRequests().antMatchers("/hello","/uaa/test").authenticated();
     }
 
 
