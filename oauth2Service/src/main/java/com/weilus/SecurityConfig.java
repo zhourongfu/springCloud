@@ -1,10 +1,13 @@
 package com.weilus;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter;
 
 /**
 授权码模式
@@ -28,15 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.requestMatchers()
                 .antMatchers("/login", "/oauth/authorize", "/oauth/token")
                 .and()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
-//                .accessDeniedHandler(new OAuth2AccessDeniedHandler())
-//                .and()
-                .formLogin()
-                    .loginPage("/login")
-                .permitAll();
+                .formLogin().loginPage("/login").permitAll();
     }
+
 }

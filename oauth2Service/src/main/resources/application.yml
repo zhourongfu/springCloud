@@ -8,6 +8,7 @@ security:
     authorization:
       token-key-access: permitAll()
       check-token-access: isAuthenticated()
+  ignored: /oauth/check_token
 
 spring:
   thymeleaf:
