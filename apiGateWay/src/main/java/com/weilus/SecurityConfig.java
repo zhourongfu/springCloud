@@ -8,7 +8,6 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -22,19 +21,26 @@ import java.io.IOException;
 /**
  * Created by liutq on 2018/5/25.
  */
+
+@Configuration
 @EnableEurekaClient
 @RibbonClient(name = "uaa")
-@Configuration
 @EnableResourceServer
 public class SecurityConfig extends ResourceServerConfigurerAdapter {
 
-
+    static String[] NOT_CHECK_TOKEN_PATTERNS =new String[]{
+            "/serviceCustomer/**",
+            "/uaa/oauth/authorize",
+            "/uaa/login",
+            "/favicon.ico"
+    };
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests().antMatchers("/serviceCustomer/**").permitAll()
+            .authorizeRequests().antMatchers(NOT_CHECK_TOKEN_PATTERNS).permitAll()
             .and()
-            .authorizeRequests().antMatchers("/hello","/uaa/test").authenticated();
+            .authorizeRequests().anyRequest().authenticated().and()
+            .authorizeRequests().antMatchers("/uaa/test").hasAnyRole("USER");
     }
 
 
@@ -45,7 +51,6 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
         RestTemplate restTemplate = new RestTemplate();
         ((RestTemplate) restTemplate).setErrorHandler(new DefaultResponseErrorHandler() {
             @Override
-            // Ignore 400
             public void handleError(ClientHttpResponse response) throws IOException {
                 if (response.getRawStatusCode() != 400) {
                     super.handleError(response);
@@ -55,10 +60,10 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
         return restTemplate;
     }
 
-    @Primary
     @Bean
+    @Primary
     @Autowired
-    @Qualifier("remoteTokenRestTemplate")
+    @Qualifier(value = "remoteTokenRestTemplate")
     public RemoteTokenServices remoteTokenServices(RestTemplate restTemplate){
         RemoteTokenServices services = new RemoteTokenServices();
         services.setCheckTokenEndpointUrl("http://uaa/oauth/check_token");

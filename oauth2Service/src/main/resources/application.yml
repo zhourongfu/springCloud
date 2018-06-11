@@ -4,10 +4,6 @@ server:
 security:
   basic:
     enabled: false
-  oauth2:
-    authorization:
-      token-key-access: permitAll()
-      check-token-access: isAuthenticated()
   ignored: /oauth/check_token
 
 spring:

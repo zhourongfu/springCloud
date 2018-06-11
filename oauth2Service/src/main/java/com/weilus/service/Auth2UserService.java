@@ -7,8 +7,6 @@ import com.weilus.entity.Auth2UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,7 +33,6 @@ public class Auth2UserService implements UserDetailsService {
         }
         List<Auth2RoleEntity> roles = auth2RoleDao.loadByUserId(user.getId());
         user.setAuthorities(roles);
-        System.err.println(user);
         return user;
     }
 }

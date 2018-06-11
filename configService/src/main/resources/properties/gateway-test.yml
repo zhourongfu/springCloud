@@ -13,6 +13,7 @@ zuul:
       serviceId: uaa
       path: /uaa/**
       ignored-patterns: /uaa/check_token
+      sensitive-headers:
     serviceCustomer:
       serviceId: serviceCustomer
       path: /serviceCustomer/**
