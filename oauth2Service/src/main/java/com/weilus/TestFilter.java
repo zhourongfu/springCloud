@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,7 @@ import java.util.Enumeration;
 /**
  * Created by liutq on 2018/6/12.
  */
-@Configuration
+//@Configuration
 public class TestFilter implements Filter{
     private static Logger logger = LoggerFactory.getLogger(TestFilter.class);
 

@@ -26,11 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().mvcMatchers("/oauth/authorize").authenticated()
                 .and()
                 .formLogin()
-                 //重定向 访问登录页面
                 .loginPage("/uaa/login")
-                 //zuul代理后 重定向uri加入微服务ID
                 .successHandler(new SavedRequestAwareAuthenticationSuccessHandler("uaa"))
-                 //登录表单提交时的地址  默认为loginPage
                 .loginProcessingUrl("/login");//zuul代理
     }
 

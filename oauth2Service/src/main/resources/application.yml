@@ -2,9 +2,12 @@ debug: false
 server:
   port: 8080
 security:
-  basic:
-    enabled: false
-  ignored: /oauth/check_token
+#  ignored: /oauth/check_token
+  oauth2:
+    authorization:
+      check-token-access: permitAll()
+
+
 
 spring:
   thymeleaf:

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Controller
 public class TestController {
@@ -32,8 +31,9 @@ public class TestController {
     }
 
     @RequestMapping("/test")
-    public @ResponseBody Object xx(Principal principal){
-        logger.info("principal===========>"+principal);
-        return principal;
+    public @ResponseBody Object xx(){
+        String msg = "test call successful !!!!!!!";
+        logger.info(msg);
+        return msg;
     }
 }
