@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 
 /**
  * Created by liutq on 2018/5/25.
@@ -53,8 +52,7 @@ public class GateWayHystrixFallBackProvider implements ZuulFallbackProvider {
             @Override
             public HttpHeaders getHeaders() {
                 HttpHeaders headers = new HttpHeaders();
-                MediaType mt = new MediaType("application.yml", "json", Charset.forName("UTF-8"));
-                headers.setContentType(mt);
+                headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
                 return headers;
             }
         };

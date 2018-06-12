@@ -23,4 +23,5 @@ logging:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
     org.springframework: INFO
+    org.springframework.security: DEBUG
     org.apache.ibatis: INFO
