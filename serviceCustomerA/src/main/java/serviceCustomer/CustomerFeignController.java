@@ -43,4 +43,17 @@ public class CustomerFeignController {
 		logger.info(user.getName());
 		return Collections.singletonMap("result","ServiceA TEST2 called!");
 	}
+
+
+	@RequestMapping("/timeout")
+	public Object tt(){
+		try {
+			Thread.sleep(20000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("timeout  call successful");
+		return Collections.singletonMap("result","ServiceA TEST2 called!");
+	}
+
 }

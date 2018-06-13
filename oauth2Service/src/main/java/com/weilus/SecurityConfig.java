@@ -1,14 +1,12 @@
 package com.weilus;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -59,7 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //                .formLogin()
 //                .loginPage("/uaa/login")
 //                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler("uaa"))
-//                .loginProcessingUrl("/login");//zuul代理
+//                .loginProcessingUrl("/login")//zuul代理
+//                .and()
+//                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
     }
 
 

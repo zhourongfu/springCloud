@@ -30,7 +30,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
 
     public static final String UAA_SERVICE_ID="uaa";
     static String[] NOT_CHECK_TOKEN_PATTERNS =new String[]{
-//            "/serviceCustomer/**",
+            "/timeout",
             "/uaa/oauth/authorize",
             "/uaa/oauth/token",
             "/uaa/login",
