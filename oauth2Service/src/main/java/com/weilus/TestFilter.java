@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import java.util.Enumeration;
 /**
  * Created by liutq on 2018/6/12.
  */
-//@Configuration
+@Configuration
 public class TestFilter implements Filter{
     private static Logger logger = LoggerFactory.getLogger(TestFilter.class);
 
@@ -35,13 +36,13 @@ public class TestFilter implements Filter{
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req= (HttpServletRequest) request;
-        logger.info("HEADERS  REPORTS=============");
+        System.err.println("HEADERS  REPORTS=============");
         Enumeration<String> e= req.getHeaderNames();
         while(e.hasMoreElements()){
             String headerName = e.nextElement();
             logger.info(headerName+" = "+req.getHeader(headerName));
         }
-        logger.info("PARAMETERS  REPORTS=============");
+        System.err.println("PARAMETERS  REPORTS=============");
         Enumeration<String> p = req.getParameterNames();
         while(p.hasMoreElements()){
             String paramName = p.nextElement();

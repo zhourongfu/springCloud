@@ -3,11 +3,10 @@ package com.weilus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 public class TestController {
@@ -15,19 +14,25 @@ public class TestController {
 
     @RequestMapping("/login")
     public String login(){
-        return "login";
+        return "authorize_login";
     }
 
     @RequestMapping("/oauth/confirm_access")
-    public String authorize(HttpServletRequest request, Model model){
-        model.addAttribute("access_token",request.getParameter("access_token"));
-        model.addAttribute("redirect_uri",request.getParameter("redirect_uri"));
+    public String authorize(){
         return "authorize";
     }
 
     @RequestMapping("/oauth/error")
     public String error(){
         return "error";
+    }
+    @RequestMapping("/sso/login")
+    public String index(){
+        return "sso_login";
+    }
+    @RequestMapping("/")
+    public @ResponseBody  Principal index(Principal user){
+        return user;
     }
 
     @RequestMapping("/test")

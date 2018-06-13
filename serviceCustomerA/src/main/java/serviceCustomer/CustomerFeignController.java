@@ -30,7 +30,7 @@ public class CustomerFeignController {
 
 
 	@RequestMapping("test1")
-//	@PreAuthorize("#oauth2.hasScope('openid') and hasRole('ROLE_ADMIN')")
+//	@PreAuthorize("#oauth2.hasScope('read') and hasRole('ROLE_ADMIN')")
 	@RolesAllowed("ROLE_ADDccc")
 	public Object test1(Principal user){
 		logger.info(user.toString());
