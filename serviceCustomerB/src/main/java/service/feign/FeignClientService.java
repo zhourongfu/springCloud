@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import serviceCustomer.hystrix.FeignConfig;
+import com.weilus.serviceCustomer.hystrix.FeignConfig;
 
 @FeignClient(name="serviceProducer",fallback=FeignConfig.FallBackLocal.class,configuration=FeignConfig.class)
 public interface FeignClientService {

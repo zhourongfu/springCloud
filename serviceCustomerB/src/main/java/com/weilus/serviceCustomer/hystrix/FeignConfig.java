@@ -1,14 +1,14 @@
-package serviceCustomer.hystrix;
+package com.weilus.serviceCustomer.hystrix;
 
-import feign.Request;
-import feign.auth.BasicAuthRequestInterceptor;
+import java.util.Map;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import service.feign.FeignClientService;
 
-import java.util.Map;
+import feign.Request;
+import feign.auth.BasicAuthRequestInterceptor;
+import service.feign.FeignClientService;
 
 @Configuration
 public class FeignConfig {
@@ -27,10 +27,5 @@ public class FeignConfig {
 	 	public String sayHello(Map<String, String> map) {
 	 		return "hello, im local say";
 	 	}
-
-		@Override
-		public String hiMan(@RequestBody Map<String, String> map) {
-			return "hello, local hi Man";
-		}
-	}
+	 }
 }

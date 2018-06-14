@@ -12,8 +12,8 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
   server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 600
+    enable-self-preservation: false #关闭eureka的自我保护 踢出已关闭的节点
+    eviction-interval-timer-in-ms: 600 #清理间隔时间，单位为毫秒
 
 security:
   user:

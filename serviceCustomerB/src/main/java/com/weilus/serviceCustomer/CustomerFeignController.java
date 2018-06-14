@@ -1,4 +1,4 @@
-package serviceCustomer;
+package com.weilus.serviceCustomer;
 
 import java.util.Collections;
 import java.util.Map;

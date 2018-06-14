@@ -2,30 +2,15 @@ debug: false
 server:
   port: 8090
 
-endpoints:
-  autoconfig.enabled: false
-  beans.enabled: false
-  configprops.enabled: true
-  dump.enabled: false
-  env.enabled: false
-  metrics.enabled: false
-  mappings.enabled: false
-  shutdown.enabled: false
-  trace.enabled: false
-  heapdump.enabled: false
-  restart.enabled: false
-  auditevents.enabled: false
-  loggers.enabled: false
-  features.enabled: false
-  env.post.enabled: false
-  pause.enabled: false
-
+eureka:
+  client:
+    healthcheck:
+      enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
 
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     com.weilus: DEBUG
-    com.netflix.eureka: OFF
-    com.netflix.discovery: OFF
+    com.netflix.discovery: ERROR
     org.springframework.security: INFO

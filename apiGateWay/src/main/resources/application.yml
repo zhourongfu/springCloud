@@ -1,6 +1,9 @@
 server:
   port: 8088
-
+eureka:
+  client:
+    healthcheck:
+      enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000

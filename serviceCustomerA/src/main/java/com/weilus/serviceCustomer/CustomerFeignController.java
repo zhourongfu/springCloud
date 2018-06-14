@@ -1,4 +1,4 @@
-package serviceCustomer;
+package com.weilus.serviceCustomer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

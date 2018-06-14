@@ -1,4 +1,4 @@
-package serviceCustomer;
+package com.weilus.serviceCustomer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +30,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
 
     public static final String UAA_SERVICE_ID="uaa";
     static String[] NOT_CHECK_TOKEN_PATTERNS =new String[]{
+            "/test",
             "/timeout",
             "/uaa/oauth/authorize",
             "/uaa/oauth/token",

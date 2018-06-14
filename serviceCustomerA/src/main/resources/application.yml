@@ -1,9 +1,20 @@
 server:
   port: 8082
 
+eureka:
+  client:
+    healthcheck:
+      enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
+
+serviceProducer: #微服务serviceProducer 负载均衡策略(灰度发布策略)
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ZoneAvoidanceRule
+
+
 feign:
   hystrix:
     enabled: true
+
 
 
 

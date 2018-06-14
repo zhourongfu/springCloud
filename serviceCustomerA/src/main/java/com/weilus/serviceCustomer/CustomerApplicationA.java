@@ -1,4 +1,4 @@
-package serviceCustomer;
+package com.weilus.serviceCustomer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,10 +11,10 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages="service.feign")
 @EnableHystrix
-public class CustomerApplicationB {
+public class CustomerApplicationA {
 	
 	public static void main(String[] args) {
-	    SpringApplication.run(CustomerApplicationB.class, args);
+	    SpringApplication.run(CustomerApplicationA.class, args);
 	}
 	
 }

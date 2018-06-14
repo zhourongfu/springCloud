@@ -1,6 +1,10 @@
 debug: false
 server:
   port: 8080
+eureka:
+  client:
+    healthcheck:
+      enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
 security:
   filter-order: 6
   oauth2:
@@ -16,8 +20,8 @@ spring:
 
 github:
   client:
-    clientId:
-    clientSecret:
+    clientId: clientId
+    clientSecret: clientSecret
     accessTokenUri: https://github.com/login/oauth/access_token
     userAuthorizationUri: https://github.com/login/oauth/authorize
     clientAuthenticationScheme: form
@@ -25,8 +29,8 @@ github:
     userInfoUri: https://api.github.com/user
 facebook:
     client:
-      clientId:
-      clientSecret:
+      clientId: clientId
+      clientSecret: clientSecret
       accessTokenUri: https://graph.facebook.com/oauth/access_token
       userAuthorizationUri: https://www.facebook.com/dialog/oauth
       tokenName: oauth_token
