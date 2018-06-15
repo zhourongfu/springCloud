@@ -7,6 +7,8 @@ eureka:
     healthcheck:
       enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
 
+
+
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
