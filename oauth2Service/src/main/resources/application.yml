@@ -5,14 +5,6 @@ eureka:
   client:
     healthcheck:
       enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
-security:
-  filter-order: 6
-  oauth2:
-    authorization:
-      check-token-access: permitAll()
-    resource:
-      filter-order: 100
-
 
 spring:
   thymeleaf:
@@ -45,6 +37,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
@@ -54,3 +47,14 @@ logging:
     org.springframework: INFO
     org.springframework.security: DEBUG
     org.apache.ibatis: INFO
+
+management:
+  security:
+    enabled: false
+  health:
+    redis:
+      enabled: false
+    rabbit:
+      enabled: false
+    db:
+      enabled: false

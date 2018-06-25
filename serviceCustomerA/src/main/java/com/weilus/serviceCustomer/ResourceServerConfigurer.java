@@ -32,9 +32,6 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
     static String[] NOT_CHECK_TOKEN_PATTERNS =new String[]{
             "/test",
             "/timeout",
-            "/uaa/oauth/authorize",
-            "/uaa/oauth/token",
-            "/uaa/login",
             "/favicon.ico"
     };
 
@@ -73,6 +70,8 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
             RemoteTokenServices services = new RemoteTokenServices();
             services.setCheckTokenEndpointUrl("http://"+UAA_SERVICE_ID+"/oauth/check_token");
             services.setRestTemplate(restTemplate);
+            services.setClientId("acme");
+            services.setClientSecret("acmesecret");
             return services;
         }
     }
