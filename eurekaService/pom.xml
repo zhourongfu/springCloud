@@ -17,4 +17,26 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
   </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <imageName>mavendemo</imageName>
+                    <dockerDirectory>${basedir}</dockerDirectory> <!-- 指定 Dockerfile 路径-->
+                    <resources>
+                        <resource>
+                            <targetPath>/ROOT</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
