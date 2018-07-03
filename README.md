@@ -1,4 +1,5 @@
 # springCloud
+![结构](https://github.com/weilus923/springCloud/blob/master/test.jpg)
 ### 注册中心eurekaService
 
     依次启动 eurekaService
