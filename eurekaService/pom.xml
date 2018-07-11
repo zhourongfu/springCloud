@@ -29,10 +29,12 @@
                     <dockerHost>https://192.168.198.128:2375</dockerHost> <!-- docker remote api  -->
                     <dockerCertPath>E:\\dockerCerts\\192.168.198.128\\client</dockerCertPath><!-- docker remote api cert -->
                     <imageName>${project.groupId}/${project.artifactId}</imageName>
-                    <dockerDirectory>${basedir}</dockerDirectory> <!-- 指定 Dockerfile 路径-->
+                    <baseImage>openjdk:8-jdk-alpine</baseImage>
+                    <volumes><volume>/tmp</volume></volumes>
+                    <exposes><expose>8761</expose></exposes>
+                    <entryPoint>["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
                         <resource>
-                            <targetPath>/ROOT</targetPath>
                             <directory>${project.build.directory}</directory>
                             <include>${project.build.finalName}.jar</include>
                         </resource>
