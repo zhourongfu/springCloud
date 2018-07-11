@@ -5,7 +5,7 @@
     <artifactId>springCloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>eurekaService</artifactId>
+  <artifactId>eureka</artifactId>
   
     <dependencies>
       	<dependency>
@@ -26,7 +26,9 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.0.0</version>
                 <configuration>
-                    <imageName>mavendemo</imageName>
+                    <dockerHost>https://192.168.198.128:2375</dockerHost> <!-- docker remote api  -->
+                    <dockerCertPath>E:\\dockerCerts\\192.168.198.128\\client</dockerCertPath><!-- docker remote api cert -->
+                    <imageName>${project.groupId}/${project.artifactId}</imageName>
                     <dockerDirectory>${basedir}</dockerDirectory> <!-- 指定 Dockerfile 路径-->
                     <resources>
                         <resource>
