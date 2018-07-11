@@ -5,7 +5,7 @@
     <artifactId>springCloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>configService</artifactId>
+  <artifactId>config</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -35,4 +35,30 @@
 		</dependency>
 		
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<dockerHost>https://192.168.100.4:2375</dockerHost>
+					<dockerCertPath>E:\\dockerCerts\\192.168.100.4\\client</dockerCertPath>
+					<imageName>${project.groupId}/${project.artifactId}</imageName>
+					<baseImage>openjdk:8-jdk-alpine</baseImage>
+					<volumes><volume>/tmp</volume></volumes>
+					<exposes><expose>7000</expose></exposes>
+					<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
