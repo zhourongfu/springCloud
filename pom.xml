@@ -35,7 +35,27 @@
 	            <version>1.3.1.RELEASE</version>
 	            <type>pom</type>
 	            <scope>import</scope>
-	        </dependency>			
+	        </dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+				<version>1.3.1.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>1.1.9</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>6.0.6</version>
+			</dependency>
 	    </dependencies>
 	</dependencyManagement>
 	
@@ -53,6 +73,31 @@
 	                 </execution>
 	            </executions>
 	        </plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<dockerHost>https://47.92.116.75:2375</dockerHost>
+					<dockerCertPath>E:\\dockerCerts\\47.92.116.75\\client</dockerCertPath>
+					<imageName>${project.groupId}/${project.artifactId}</imageName>
+					<baseImage>openjdk:8-jdk-alpine</baseImage>
+					<exposes>
+						<expose>8080</expose>
+					</exposes>
+					<runs><run>echo 'Asia/Shanghai'>/etc/timezone</run></runs>
+					<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<forceTags>true</forceTags>
+					<image>${project.groupId}/${project.artifactId}</image>
+					<newName>${project.groupId}/${project.artifactId}:${project.version}</newName>
+				</configuration>
+			</plugin>
 	     </plugins>
 	</build>
 </project>

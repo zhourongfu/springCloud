@@ -20,7 +20,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-            <version>1.3.1.RELEASE</version>
         </dependency>
     	<dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -28,28 +27,4 @@
 		</dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <dockerHost>https://192.168.100.5:2375</dockerHost>
-                    <dockerCertPath>E:\\dockerCerts\\192.168.100.5\\client</dockerCertPath>
-                    <imageName>${project.groupId}/${project.artifactId}</imageName>
-                    <baseImage>openjdk:8-jdk-alpine</baseImage>
-                    <volumes><volume>/tmp</volume></volumes>
-                    <exposes><expose>8088</expose></exposes>
-                    <entryPoint>["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-                    <resources>
-                        <resource>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
