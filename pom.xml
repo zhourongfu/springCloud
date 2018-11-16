@@ -78,8 +78,8 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.0.0</version>
 				<configuration>
-					<dockerHost>https://47.92.116.75:2375</dockerHost>
-					<dockerCertPath>E:\\dockerCerts\\47.92.116.75\\client</dockerCertPath>
+					<dockerHost>http://192.168.198.128:2375</dockerHost>
+					<!--<dockerCertPath>E:\dockerCerts\192.168.198.128\client</dockerCertPath>-->
 					<imageName>${project.groupId}/${project.artifactId}</imageName>
 					<baseImage>openjdk:8-jdk-alpine</baseImage>
 					<exposes>
