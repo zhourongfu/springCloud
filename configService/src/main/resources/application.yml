@@ -20,13 +20,25 @@ spring:
   application:
     name: configService
   profiles:
-    active: native
+    active: jdbc
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.198.128:3306/test?Unicode=true&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: weilus
+      initial-size: 10
+      min-idle: 10
+      max-active: 100
+      max-wait: 6000
+      min-evictable-idle-time-millis: 300000
+      time-between-eviction-runs-millis: 60000
   cloud:
     config:
       failFast: true
       server:
-        native:
-          search-locations: file:/tmp/properties
+        jdbc:
+          sql: SELECT `key`, `value` FROM cloud_properties WHERE application=? AND profile=? AND label=?
   rabbitmq:
     addresses: 192.168.198.128:5672
     username: guest
