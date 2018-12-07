@@ -15,16 +15,17 @@ spring:
   profiles:
     active: test
   application:
-    name: uaa
+    name: oauth
   cloud:
     config:
       fail-fast: true
       discovery:
         enabled: true
-        service-id: configService
+        service-id: config
       username: config
       password: cf123456
       profile: ${spring.profiles.active}
+      label: master
     bus:
       trace:
         enabled: true
