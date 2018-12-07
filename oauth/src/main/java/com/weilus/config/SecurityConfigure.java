@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -33,6 +34,7 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * Created by liutq on 2018/10/23.
@@ -47,7 +49,7 @@ public class SecurityConfigure extends ResourceServerConfigurerAdapter {
     @Autowired
     RedisConnectionFactory connectionFactory;
     @Autowired
-    DruidDataSource dataSource;
+    DataSource dataSource;
 
     @Bean
     @Primary
@@ -75,7 +77,7 @@ public class SecurityConfigure extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 //所有注解 @CheckLogin(false) 不验证登录
-                .authorizeRequests().antMatchers("/aaaaaaa/**").permitAll()
+                .authorizeRequests().antMatchers("/oauth/token").permitAll()
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
