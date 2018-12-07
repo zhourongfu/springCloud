@@ -17,12 +17,7 @@
   		<module>eureka</module>
 	  	<module>zuul</module>
   		<module>config</module>
-
-	  	<module>oauth2Service</module>
-	  	<module>serviceCustomerA</module>
-	    <module>serviceCustomerB</module>
-  		<module>serviceProducer</module>
-
+	  	<module>oauth</module>
 	    <module>turbine</module>
 
   </modules>
