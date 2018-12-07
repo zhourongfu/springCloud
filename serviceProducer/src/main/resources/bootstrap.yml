@@ -21,16 +21,11 @@ spring:
       fail-fast: true
       discovery:
         enabled: true
-        service-id: configService
+        service-id: config
       username: config
       password: cf123456
       profile: ${spring.profiles.active}
+      label: master
     bus:
       trace:
         enabled: true
-    alicloud: # 阿里云 oss
-      oss:
-        endpoint:
-        sts:
-          access-key:
-          secret-key:

@@ -23,6 +23,7 @@ spring:
       username: config
       password: cf123456
       profile: ${spring.profiles.active}
+      label: master
     bus:
       trace:
         enabled: true
