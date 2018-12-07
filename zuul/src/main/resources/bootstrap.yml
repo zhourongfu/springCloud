@@ -13,13 +13,13 @@ spring:
   profiles:
     active: test
   application:
-    name: gateway
+    name: zuul
   cloud:
     config:
       fail-fast: true
       discovery:
         enabled: true
-        service-id: configService
+        service-id: config
       username: config
       password: cf123456
       profile: ${spring.profiles.active}

@@ -18,7 +18,7 @@ eureka:
 
 spring:
   application:
-    name: turbineService
+    name: turbine
 
 turbine:
   appConfig: serviceCustomer
