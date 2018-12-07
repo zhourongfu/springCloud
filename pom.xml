@@ -23,7 +23,7 @@
 	    <module>serviceCustomerB</module>
   		<module>serviceProducer</module>
 
-	    <module>turbineService</module>
+	    <module>turbine</module>
 
   </modules>
 		
