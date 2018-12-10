@@ -69,6 +69,7 @@ public class SecurityConfigure extends ResourceServerConfigurerAdapter {
         JdbcDaoImpl dao =new JdbcDaoImpl();
         dao.setDataSource(dataSource);
         dao.setEnableGroups(true);
+        dao.setRolePrefix("ROLE_");
         return dao;
     }
 

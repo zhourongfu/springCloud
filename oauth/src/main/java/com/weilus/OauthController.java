@@ -5,6 +5,8 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
@@ -38,6 +40,11 @@ public class OauthController {
         OAuth2Authentication auth2entication = new OAuth2Authentication(oAuth2Request,authentication);
         OAuth2AccessToken accessToken = tokenServices.createAccessToken(auth2entication);
         return accessToken;
+    }
+
+    @RequestMapping("/me")
+    public UserDetails getUser(){
+        return (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 }
