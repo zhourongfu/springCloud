@@ -1,17 +1,16 @@
 package com.weilus.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -49,24 +48,24 @@ public class SecurityConfigure extends ResourceServerConfigurerAdapter {
     @Autowired
     RedisConnectionFactory connectionFactory;
     @Autowired
-    DataSource dataSource;
+    ClientDetailsService clientDetailsService;
 
     @Bean
     @Primary
     public DefaultTokenServices tokenServices(){
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(new RedisTokenStore(connectionFactory));
-        tokenServices.setClientDetailsService(clientDetailsService());
+        tokenServices.setClientDetailsService(clientDetailsService);
         tokenServices.setAuthenticationManager(authenticationManager);
         return tokenServices;
     }
     @Bean
-    public ClientDetailsService clientDetailsService(){
+    public ClientDetailsService clientDetailsService(@Autowired DataSource dataSource){
         return new JdbcClientDetailsService(dataSource);
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService(@Autowired DataSource dataSource){
         JdbcDaoImpl dao =new JdbcDaoImpl();
         dao.setDataSource(dataSource);
         dao.setEnableGroups(true);
