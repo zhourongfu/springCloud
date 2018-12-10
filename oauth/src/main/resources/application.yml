@@ -9,18 +9,6 @@ eureka:
 spring:
   thymeleaf:
     cache: false
-#  datasource:
-#    druid:
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://192.168.198.128:3306/test?Unicode=true&characterEncoding=UTF-8&useSSL=false
-#      username: root
-#      password: weilus
-#      initial-size: 10
-#      min-idle: 10
-#      max-active: 100
-#      max-wait: 6000
-#      min-evictable-idle-time-millis: 300000
-#      time-between-eviction-runs-millis: 60000
 
 logging:
   pattern:
@@ -32,13 +20,14 @@ logging:
     org.springframework.security: DEBUG
     org.apache.ibatis: INFO
     org.springframework.jdbc: DEBUG
+
 management:
   security:
     enabled: false
   health:
     redis:
-      enabled: false
+      enabled: true
     rabbit:
       enabled: false
     db:
-      enabled: false
+      enabled: true
