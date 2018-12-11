@@ -20,6 +20,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
     public RemoteTokenServices tokenServices(){
         RemoteTokenServices tokenService = new RemoteTokenServices();
         tokenService.setCheckTokenEndpointUrl("http://192.168.198.1:8080/oauth/check_token");
+        tokenService.setClientId("accc");
+        tokenService.setClientSecret("acccsecret");
         return tokenService;
     }
 
