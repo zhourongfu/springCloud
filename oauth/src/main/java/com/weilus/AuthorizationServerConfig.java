@@ -36,12 +36,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private DefaultTokenServices tokenServices;
 
-    private UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManagerConfigurer configurer = new InMemoryUserDetailsManagerConfigurer();
-        configurer.withUser("admin").password("weilus").authorities("ADD");
-        return configurer.getUserDetailsService();
-    }
-
     @Bean
     @Primary
     public DefaultTokenServices tokenServices(){
@@ -60,7 +54,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.tokenStore(new RedisTokenStore(connectionFactory));
         endpoints.tokenServices(tokenServices);
 //        endpoints.authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource));
-        endpoints.userDetailsService(userDetailsService());
     }
 
     @Override

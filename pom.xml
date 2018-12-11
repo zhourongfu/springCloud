@@ -18,7 +18,7 @@
 	  	<module>zuul</module>
   		<module>config</module>
 
-	  	<module>oauth2Service</module>
+	  	<module>oauth</module>
 	  	<module>serviceCustomerA</module>
 	    <module>serviceCustomerB</module>
   		<module>serviceProducer</module>
