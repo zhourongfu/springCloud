@@ -55,3 +55,9 @@ id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 group_id INT(11),
 authority VARCHAR(50)
 );
+
+-- 授权码记录表
+CREATE TABLE oauth_code(
+code varchar(50) DEFAULT NULL,
+authentication blob
+);

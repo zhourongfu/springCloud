@@ -50,7 +50,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     @Primary
     public DefaultTokenServices tokenServices(@Autowired JedisConnectionFactory connectionFactory){
-        System.err.println(connectionFactory.getHostName()+":"+connectionFactory.getPort()+"/"+connectionFactory.getPassword());
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(new RedisTokenStore(connectionFactory));
         tokenServices.setClientDetailsService(clientDetailsService);
