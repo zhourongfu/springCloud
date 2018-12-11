@@ -1,0 +1,30 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:123456@192.168.198.128:8761/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 10 #租赁更新时间间隔，默认30，即10秒发送一次心跳
+    lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    metadata-map:
+      cluster: TEST-TURBINE
+
+spring:
+  profiles:
+    active: test
+  application:
+    name: oauthResource
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        enabled: true
+        service-id: config
+      username: config
+      password: cf123456
+      profile: ${spring.profiles.active}
+      label: master
+    bus:
+      trace:
+        enabled: true

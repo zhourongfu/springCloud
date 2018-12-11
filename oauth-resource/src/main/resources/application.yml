@@ -1,0 +1,33 @@
+debug: false
+server:
+  port: 8081
+eureka:
+  client:
+    healthcheck:
+      enabled: true #必须放在application.yml,开启健康检查(需要spring-boot-starter-actuator依赖)
+
+spring:
+  thymeleaf:
+    cache: false
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    com.weilus: DEBUG
+    com.netflix.discovery: ERROR
+    org.springframework: INFO
+    org.springframework.security: DEBUG
+    org.apache.ibatis: INFO
+    org.springframework.jdbc: DEBUG
+
+management:
+  security:
+    enabled: false
+  health:
+    redis:
+      enabled: true
+    rabbit:
+      enabled: false
+    db:
+      enabled: false
