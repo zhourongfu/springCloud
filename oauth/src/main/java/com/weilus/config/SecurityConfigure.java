@@ -30,10 +30,8 @@ public class SecurityConfigure extends ResourceServerConfigurerAdapter {
                 .authorizeRequests().mvcMatchers("/oauth/authorize").authenticated()
                 .and()
                 .formLogin().loginPage("/login").passwordParameter("password").usernameParameter("username")
-                .and()
-                .authorizeRequests().antMatchers("/oauth/token","/oauth/authorize").permitAll()
-                .and()
-                .authorizeRequests().anyRequest().authenticated()
+//                .and()
+//                .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler((HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e)->{
