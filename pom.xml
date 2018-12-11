@@ -17,7 +17,10 @@
   		<module>eureka</module>
 	  	<module>zuul</module>
   		<module>config</module>
-	  	<module>oauth</module>
+
+	  	<module>oauth-authorization</module>
+	  	<module>oauth-resource</module>
+
 	    <module>turbine</module>
 
   </modules>

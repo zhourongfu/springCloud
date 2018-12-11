@@ -1,9 +1,9 @@
 package com.weilus;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by liutq on 2018/12/7.
@@ -29,8 +29,8 @@ public class OauthController {
     }
 
     @RequestMapping("/me")
-    public UserDetails getUser(){
-        return (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public @ResponseBody  Object getUser(){
+        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
 
