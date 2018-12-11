@@ -1,6 +1,5 @@
 package com.weilus.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -9,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import redis.clients.jedis.JedisPoolConfig;
-
-import javax.sql.DataSource;
 
 /**
  * 当配置中心发生变化时，自动变更相关配置
@@ -43,12 +40,12 @@ public class RefreshConfiguration {
         return factory;
     }
 
-    @Bean
-    @Primary
-    @RefreshScope
-    @ConfigurationProperties("spring.datasource.druid")
-    public DataSource dataSource(){
-        return new DruidDataSource();
-    }
+//    @Bean
+//    @Primary
+//    @RefreshScope
+//    @ConfigurationProperties("spring.datasource.druid")
+//    public DataSource dataSource(){
+//        return new DruidDataSource();
+//    }
 
 }
