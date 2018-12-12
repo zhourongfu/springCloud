@@ -10,6 +10,13 @@ spring:
   thymeleaf:
     cache: false
 
+security:
+  basic:
+    path: /sayHello,/hiMan
+  user:
+    name: fadffsedfsf
+    password: rrfdaDSFfesnmhf
+
 feign:
   hystrix:
     enabled: true
@@ -41,3 +48,4 @@ management:
       enabled: false
     db:
       enabled: false
+

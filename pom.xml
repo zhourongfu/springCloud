@@ -89,9 +89,6 @@
 					<!--<dockerCertPath>E:\dockerCerts\192.168.198.128\client</dockerCertPath>-->
 					<imageName>${project.groupId}/${project.artifactId}</imageName>
 					<baseImage>openjdk:8-jdk-alpine</baseImage>
-					<exposes>
-						<expose>8080</expose>
-					</exposes>
 					<runs><run>echo 'Asia/Shanghai'>/etc/timezone</run></runs>
 					<entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint>
 					<resources>
