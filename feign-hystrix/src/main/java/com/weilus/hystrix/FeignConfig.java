@@ -1,4 +1,4 @@
-package com.feign.hystrix;
+package com.weilus.hystrix;
 
 import com.feign.FeignClientService;
 import feign.Request;
@@ -23,9 +23,9 @@ public class FeignConfig {
     }
 
     @Component
-    public static class FallBackLocal implements FeignClientService {
+    public static class CallBack implements FeignClientService {
         @Override
-        public String sayHello(Map<String, String> map) {
+        public String sayHello(@RequestBody Map<String, String> map) {
             return "feign-call: Hello "+map.get("name");
         }
 

@@ -17,9 +17,9 @@ import java.util.Collections;
 
 @Configuration
 @ConditionalOnProperty(name = "spring.application.name",havingValue = "feign-call")
-@RestController
 @EnableFeignClients(basePackages="com.feign")
 @EnableHystrix
+@RestController
 public class Test1Controller {
 
     @Autowired
