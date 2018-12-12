@@ -26,12 +26,12 @@ public class FeignConfig {
     public static class FallBackLocal implements FeignClientService {
         @Override
         public String sayHello(Map<String, String> map) {
-            return "hello, im local say";
+            return "feign-call: Hello "+map.get("name");
         }
 
         @Override
         public String hiMan(@RequestBody Map<String, String> map) {
-            return "hello, local hi Man";
+            return "feign-call: Hi "+map.get("name");
         }
     }
 }

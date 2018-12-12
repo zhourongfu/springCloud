@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
-@FeignClient(name="serviceProducer",fallback=FeignConfig.FallBackLocal.class,configuration=FeignConfig.class)
+@FeignClient(name="feign-service",fallback=FeignConfig.FallBackLocal.class,configuration=FeignConfig.class)
 public interface FeignClientService {
 
     @RequestMapping(value="sayHello",method=RequestMethod.POST)
