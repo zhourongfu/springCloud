@@ -10,11 +10,15 @@ spring:
   thymeleaf:
     cache: false
 
-oauth:
-  check-token:
-    service-id: oauth
-    client-id: acme
-    client-secret: acmesecret
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE #信号量隔离模式
 
 logging:
   pattern:

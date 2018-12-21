@@ -26,4 +26,4 @@ spring:
       label: master
     bus:
       trace:
-        enabled: true
+        enabled: true #配置变化跟踪
