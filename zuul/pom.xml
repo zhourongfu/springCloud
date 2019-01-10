@@ -6,7 +6,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>zuul</artifactId>
-  
+    <properties>
+        <dockerExposes>8088</dockerExposes>
+    </properties>
   
     <dependencies>
   		<dependency>

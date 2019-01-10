@@ -7,7 +7,9 @@
   </parent>
   <artifactId>config</artifactId>
   <packaging>jar</packaging>
-
+	<properties>
+		<dockerExposes>7000</dockerExposes>
+	</properties>
   <dependencies>
   		<dependency>
         	<groupId>org.springframework.cloud</groupId>

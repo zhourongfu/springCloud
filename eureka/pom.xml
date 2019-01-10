@@ -6,7 +6,9 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>eureka</artifactId>
-  
+    <properties>
+        <dockerExposes>8761</dockerExposes>
+    </properties>
     <dependencies>
       	<dependency>
             <groupId>org.springframework.cloud</groupId>
