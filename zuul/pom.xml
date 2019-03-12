@@ -8,6 +8,7 @@
   <artifactId>zuul</artifactId>
     <properties>
         <dockerExposes>8088</dockerExposes>
+        <dockerImageName>weiluscloud/zuul</dockerImageName>
     </properties>
   
     <dependencies>

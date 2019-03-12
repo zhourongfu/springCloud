@@ -1,19 +1,23 @@
 server:
   port: 8761
-
 spring:
   application:
     name: eureka
 
 eureka:
-  instance:
-      hostname: localhost
   client:
     registerWithEureka: false
     fetchRegistry: false
+    healthcheck:
+      enabled: true #开启健康检查(需要spring-boot-starter-actuator依赖)
   server:
     enable-self-preservation: false #关闭eureka的自我保护 踢出已关闭的节点
     eviction-interval-timer-in-ms: 600 #清理间隔时间，单位为毫秒
+  instance:
+    lease-renewal-interval-in-seconds: 10 #租赁更新时间间隔，默认30，即10秒发送一次心跳
+    lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
 
 security:
   user:

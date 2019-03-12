@@ -19,5 +19,16 @@ logging:
   level:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
-    org.springframework.security: debug
+    org.springframework.security: DEBUG
+
+zuul:
+  add-host-header: true
+  sensitive-headers: #无敏感头, 默认Cookie,Set-Cookie,Authorization 后台服务自己鉴权
+  add-proxy-headers: true
+
+
+management:
+  security:
+    enabled: false
+
 

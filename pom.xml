@@ -87,7 +87,6 @@
 				<configuration>
 					<dockerHost>http://192.168.198.128:2375</dockerHost>
 					<!--<dockerCertPath>E:\dockerCerts\192.168.198.3\client</dockerCertPath>-->
-					<imageName>${project.groupId}/${project.artifactId}</imageName>
 					<baseImage>openjdk:8-jdk-alpine</baseImage>
 					<runs><run>echo 'Asia/Shanghai'>/etc/timezone</run></runs>
 					<entryPoint>

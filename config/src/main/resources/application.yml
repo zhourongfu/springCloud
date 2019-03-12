@@ -5,7 +5,7 @@ server:
 
 eureka:
   client:
-    serviceUrl:
+    service-url:
       defaultZone: http://eureka:123456@192.168.198.128:8761/eureka/
     healthcheck:
       enabled: true #开启健康检查(需要spring-boot-starter-actuator依赖)

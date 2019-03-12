@@ -1,7 +1,6 @@
 package com.weilus;
 
 import com.netflix.appinfo.InstanceInfo;
-import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.*;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 import org.springframework.util.StringUtils;
@@ -14,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 灰度发布 负载策略 application.yml加上如下配置
+ * Debug优先调用负载策略 application.yml加上如下配置
  * serviceProducer: #微服务serviceProducer 负载均衡策略(灰度发布策略)
  *  ribbon:
  *#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ZoneAvoidanceRule  默认策略
@@ -30,24 +29,24 @@ import java.util.Set;
  *      strategy: SEMAPHORE
  * Created by liutq on 2018/6/15.
  */
-public class GrayRibbonRule extends PredicateBasedRule {
+public class DebugRibbonRule extends PredicateBasedRule {
 
-    public static final String META_GRAY_KEY = "gray";
+    public static final String META_DEBUG_KEY = "debug";
 
     private AbstractServerPredicate metadataAwarePredicate = new AbstractServerPredicate(){
         @Override
         public boolean apply(PredicateKey input) {
             if(input != null && input.getServer() instanceof DiscoveryEnabledServer){
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                String reqGray = request.getHeader(META_GRAY_KEY);
-                Set attributes = StringUtils.isEmpty(reqGray) ? null : Collections.singletonMap(META_GRAY_KEY,reqGray).entrySet();
+                String debug = request.getHeader(META_DEBUG_KEY);
+                Set attributes = StringUtils.isEmpty(debug) ? null : Collections.singletonMap(META_DEBUG_KEY,debug).entrySet();
                 InstanceInfo info = ((DiscoveryEnabledServer)input.getServer()).getInstanceInfo();
                 Map metadata = info.getMetadata();
                 if(attributes == null){//正常请求链路
-                    if(metadata.containsKey(META_GRAY_KEY))return false;//排除灰度Server
+                    if(metadata.containsKey(META_DEBUG_KEY))return false;//排除微服务带元信息[debug]的 Server
                     else return true;//选择正常Server
-                }else {//灰度调用
-                    //选择灰度Server 排除正常Server
+                }else {//debug 调用
+                    //选择微服务带元信息[debug]Server 排除正常Server
                     return metadata.entrySet().containsAll(attributes);
                 }
             }
@@ -56,6 +55,6 @@ public class GrayRibbonRule extends PredicateBasedRule {
     };
 
     public AbstractServerPredicate getPredicate() {
-        return CompositePredicate.withPredicates(metadataAwarePredicate,new AvailabilityPredicate(this, (IClientConfig)null)).build();
+        return CompositePredicate.withPredicates(metadataAwarePredicate,new AvailabilityPredicate(this,null)).build();
     }
 }

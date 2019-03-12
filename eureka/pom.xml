@@ -8,6 +8,7 @@
   <artifactId>eureka</artifactId>
     <properties>
         <dockerExposes>8761</dockerExposes>
+        <dockerImageName>weiluscloud/eureka</dockerImageName>
     </properties>
     <dependencies>
       	<dependency>

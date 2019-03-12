@@ -10,6 +10,7 @@
 	<properties>
 		<dockerExposes>7000</dockerExposes>
 		<dockerVolumes>/tmp</dockerVolumes>
+		<dockerImageName>weiluscloud/config</dockerImageName>
 	</properties>
   <dependencies>
   		<dependency>
