@@ -9,6 +9,9 @@ eureka:
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
     metadata-map:
       cluster: TEST-TURBINE
+      # HttpHeader 非debug=true请求(正常请求): 正常的会排除掉该服务
+      # HttpHeader debug=true请求头(debug请求): debug请求选择调用该服务
+      debug: true
 
 spring:
   profiles:
