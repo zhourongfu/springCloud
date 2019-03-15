@@ -7,6 +7,12 @@ eureka:
 ribbon:
   ReadTimeout: 60000
   ConnectTimeout: 60000
+  NFLoadBalancerRuleClassName:
+
+feign-call:
+  ribbon:
+    NFLoadBalancerRuleClassName:  com.weilus.commons.ribbon.rules.DebugRibbonRule  # DEBUG 优先策略
+
 hystrix:
   command:
     default:
