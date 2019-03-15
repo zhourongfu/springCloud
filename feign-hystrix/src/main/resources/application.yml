@@ -21,15 +21,18 @@ security:
     password: rrfdaDSFfesnmhf
 
 feign:
+  hystrix:
+    enabled: true #开启熔断
   client:
     config:
       feign-service:
-        loggerLevel:  HEADERS    #NONE,BASIC,HEADERS,FULL
-        connectTimeout: 30000    #连接超时
-        readTimeout:  10000      #响应超时
-        requestInterceptors:
+        logger-level: full    #NONE,BASIC,HEADERS,FULL
+        connect-timeout: 30000    #连接超时
+        read-timeout:  10000      #响应超时
+        request-interceptors:
           - com.weilus.commons.feign.interceptors.AuthFeignServiceInterceptor  #访问的账号密码
           - com.weilus.commons.feign.interceptors.DebugRequestInterceptor      #传递DEBUG参数到下一个服务
+
 hystrix:
   command:
     default:
@@ -46,6 +49,7 @@ logging:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
   level:
     root: INFO
+    com.feign.clients: DEBUG
     com.weilus: DEBUG
     org.springframework.jdbc: DEBUG
 
