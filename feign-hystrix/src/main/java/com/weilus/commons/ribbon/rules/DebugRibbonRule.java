@@ -1,4 +1,4 @@
-package com.weilus;
+package com.weilus.commons.ribbon.rules;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.loadbalancer.*;
@@ -34,7 +34,6 @@ public class DebugRibbonRule extends PredicateBasedRule {
     public static final String META_DEBUG_KEY = "debug";
 
     private AbstractServerPredicate metadataAwarePredicate = new AbstractServerPredicate(){
-        @Override
         public boolean apply(PredicateKey input) {
             if(input != null && input.getServer() instanceof DiscoveryEnabledServer){
                 HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

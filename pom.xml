@@ -21,7 +21,6 @@
 	  	<module>oauth-resource</module>
 	    <module>turbine</module>
 	  	<module>feign-hystrix</module>
-
   </modules>
 		
 	<dependencyManagement>

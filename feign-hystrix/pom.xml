@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <dockerImageName>weiluscloud/feign-hystrix</dockerImageName>
     </properties>
 
     <dependencies>
@@ -49,4 +50,5 @@
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
     </dependencies>
+
 </project>

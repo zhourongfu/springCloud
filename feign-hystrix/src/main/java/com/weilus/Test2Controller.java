@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.Map;
+
+import static com.weilus.Test1Controller.LOGGER;
 
 /**
  * Created by liutq on 2018/12/12.
@@ -18,7 +22,13 @@ import java.util.Map;
 public class Test2Controller {
 
     @RequestMapping(value="sayHello",method= RequestMethod.POST)
-    public String sayHello(@RequestBody Map<String, String> map){
+    public String sayHello(HttpServletRequest request, @RequestBody Map<String, String> map){
+        Enumeration<String> enumeration = request.getHeaderNames();
+        while (enumeration.hasMoreElements()){
+            String headerName = enumeration.nextElement();
+            String header = request.getHeader(headerName);
+            LOGGER.info("feign-service header [{}] : {}",headerName,header);
+        }
         return "feign-service: Hello "+map.get("name");
     }
 
