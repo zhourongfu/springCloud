@@ -40,9 +40,9 @@ hystrix:
         isolation:
           strategy: SEMAPHORE #信号量隔离模式
 
-#feign-service:
-#  ribbon:
-#    NFLoadBalancerRuleClassName: com.weilus.commons.ribbon.rules.DebugRibbonRule # DEBUG 优先策略
+feign-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.weilus.commons.ribbon.rules.DebugRibbonRule # DEBUG 优先策略
 
 logging:
   pattern:

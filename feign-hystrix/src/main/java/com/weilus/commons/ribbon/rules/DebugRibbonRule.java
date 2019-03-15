@@ -3,6 +3,8 @@ package com.weilus.commons.ribbon.rules;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.loadbalancer.*;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -30,7 +32,7 @@ import java.util.Set;
  * Created by liutq on 2018/6/15.
  */
 public class DebugRibbonRule extends PredicateBasedRule {
-
+    public static final Logger LOGGER = LoggerFactory.getLogger(DebugRibbonRule.class);
     public static final String META_DEBUG_KEY = "debug";
 
     private AbstractServerPredicate metadataAwarePredicate = new AbstractServerPredicate(){
@@ -41,6 +43,7 @@ public class DebugRibbonRule extends PredicateBasedRule {
                 Set attributes = StringUtils.isEmpty(debug) ? null : Collections.singletonMap(META_DEBUG_KEY,debug).entrySet();
                 InstanceInfo info = ((DiscoveryEnabledServer)input.getServer()).getInstanceInfo();
                 Map metadata = info.getMetadata();
+                LOGGER.info("request has header {}, that {} metadata : {}",attributes,info.getInstanceId(),metadata);
                 if(attributes == null){//正常请求链路
                     if(metadata.containsKey(META_DEBUG_KEY))return false;//排除微服务带元信息[debug]的 Server
                     else return true;//选择正常Server
