@@ -13,6 +13,9 @@ feign-call:
   ribbon:
     NFLoadBalancerRuleClassName:  com.weilus.commons.ribbon.rules.DebugRibbonRule  # DEBUG 优先策略
 
+feign:
+  hystrix:
+    enabled: true #开启熔断
 hystrix:
   command:
     default:
@@ -20,11 +23,16 @@ hystrix:
         isolation:
           strategy: SEMAPHORE
 logging:
+  file: ${log.dir:/data/logs}/${spring.application.name}.log
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    file: ${logging.pattern.console}
   level:
-    root: INFO
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
-    org.springframework.security: OFF
+    org.springframework.security: ERROR
+
+
 
 zuul:
   add-host-header: true
