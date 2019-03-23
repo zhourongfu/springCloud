@@ -20,6 +20,13 @@ hystrix:
         isolation:
           strategy: SEMAPHORE #信号量隔离模式
 
+security:
+  metadata-source:
+    rules:              #自定义资源访问规则
+      GET /test: A
+      POST /add: B,C
+      POST /api/user/**: user:*,user:add,user:del,user:upd,user:get
+
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
