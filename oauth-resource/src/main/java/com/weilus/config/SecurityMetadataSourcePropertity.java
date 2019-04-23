@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +22,8 @@ import java.util.Map;
 public class SecurityMetadataSourcePropertity {
 
     private Map<String,String> rules;
+
+    private List<String> noCheckToken;
 
     public Map<String,String> getRules() {
         return rules;
@@ -40,5 +43,13 @@ public class SecurityMetadataSourcePropertity {
             });
         }
         return requestMap;
+    }
+
+    public List<String> getNoCheckToken() {
+        return noCheckToken;
+    }
+
+    public void setNoCheckToken(List<String> noCheckToken) {
+        this.noCheckToken = noCheckToken;
     }
 }

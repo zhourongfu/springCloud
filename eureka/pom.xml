@@ -9,6 +9,7 @@
     <properties>
         <dockerExposes>8761</dockerExposes>
         <dockerImageName>weiluscloud/eureka</dockerImageName>
+        <dockerVolumes>["/tmp/logs"]</dockerVolumes>
     </properties>
     <dependencies>
       	<dependency>

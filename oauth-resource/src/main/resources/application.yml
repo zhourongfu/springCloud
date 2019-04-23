@@ -13,6 +13,14 @@ spring:
 feign:
   hystrix:
     enabled: true
+  client:
+    config:
+      oauth:
+        logger-level: full    #NONE,BASIC,HEADERS,FULL
+        connect-timeout: 30000    #连接超时
+        read-timeout:  10000      #响应超时
+        request-interceptors:
+          - com.weilus.commons.feign.interceptors.DebugRequestInterceptor      #传递DEBUG参数到下一个服务
 hystrix:
   command:
     default:
@@ -22,7 +30,11 @@ hystrix:
 
 security:
   metadata-source:
-    rules:              #自定义资源访问规则
+    no-check-token:
+    - GET /teee1
+    - POST /a/b/c
+    - /ficon.con
+    rules:              #自定义资源访问规则  <PATH_PATTERN>:<HAS_ROLES>
       GET /test: A
       POST /add: B,C
       POST /api/user/**: user:*,user:add,user:del,user:upd,user:get
