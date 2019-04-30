@@ -10,7 +10,9 @@
 ### 配置中心 config
 > 1. docker安装rabbitMq
 ```
-docker run -d --hostname my-rabbit --name=RABBITMQ -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest rabbitmq:3-management
+docker run -d --name=RABBITMQ -p 5672:5672 -p 15672:15672 \
+-e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest \
+rabbitmq:3-management
 ```
 
 > 2. 变更config配置,使配置自动生效
@@ -18,9 +20,9 @@ docker run -d --hostname my-rabbit --name=RABBITMQ -p 5672:5672 -p 15672:15672 -
     curl -X POST http://config:cf123456@192.168.198.1:7000/bus/refresh?destination=gateway:**
 ```
 
-> 3. 关于微服务启动时指定多环境配置
+> 3. 向eureka指定IP:  EUREKA_INSTANCE_IP-ADDRESS
 ```
-    java -jar xxx.jar --spring.cloud.config.profile=pro/dev
+    docker run -d -v /data/logs:/tmp/logs --name=config -e EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128 -p 7000:7000 weiluscloud/config
 ```
 
 ### 用户中心 oauth2
@@ -33,11 +35,19 @@ docker run -d --hostname my-rabbit --name=RABBITMQ -p 5672:5672 -p 15672:15672 -
 ### 熔断 hystrix
 > 1. docker启动服务提供者
 ```
-docker run -d -e "spring.application.name=feign-service" -e "server.port=8050" --net=host --name=feign-service weilus.cloud/feign-hystrix
+docker run -d --name=feign-service \
+-e "spring.application.name=feign-service" \
+-e "server.port=8050" \
+-e EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128 \
+weilus.cloud/feign-hystrix
 ```
 > 2. docker启动服务消费者
 ```
-docker run -d -e "spring.application.name=feign-call" -e "server.port=8060" --net=host --name=feign-call weilus.cloud/feign-hystrix
+docker run -d --name=feign-call \
+-e "spring.application.name=feign-call" \
+-e "server.port=8060" \
+-e EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128 \
+weilus.cloud/feign-hystrix
 ```
 
 ### 熔断监控 turbine

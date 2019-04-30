@@ -6,7 +6,7 @@ eureka:
     lease-renewal-interval-in-seconds: 10 #租赁更新时间间隔，默认30，即10秒发送一次心跳
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
     metadata-map:
       cluster: TEST-TURBINE
       gray: dev
