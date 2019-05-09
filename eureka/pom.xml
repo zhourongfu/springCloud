@@ -6,11 +6,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>eureka</artifactId>
+
     <properties>
         <dockerExposes>8761</dockerExposes>
-        <dockerImageName>weiluscloud/eureka</dockerImageName>
-        <dockerVolumes>["/tmp/logs"]</dockerVolumes>
     </properties>
+
     <dependencies>
       	<dependency>
             <groupId>org.springframework.cloud</groupId>

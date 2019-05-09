@@ -11,6 +11,10 @@
     <artifactId>oauth-authorization</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <dockerExposes>8080</dockerExposes>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
