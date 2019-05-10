@@ -23,6 +23,7 @@
 	  	<module>oauth-resource</module>
 	    <module>turbine</module>
 	  	<module>feign-hystrix</module>
+	    <module>admin</module>
   </modules>
 		
 	<dependencyManagement>
