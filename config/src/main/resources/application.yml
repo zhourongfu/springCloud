@@ -1,7 +1,10 @@
 server:
   context-path: /
   port: 7000
-
+info:
+  groupId: @project.groupId@
+  artifactId: @project.artifactId@
+  version: @project.version@
 
 eureka:
   client:
@@ -58,3 +61,14 @@ logging:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
     org.springframework: INFO
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

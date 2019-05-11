@@ -1,5 +1,9 @@
 server:
   port: 8761
+info:
+  groupId: @project.groupId@
+  artifactId: @project.artifactId@
+  version: @project.version@
 spring:
   application:
     name: eureka
@@ -43,7 +47,16 @@ logging:
     com.netflix.eureka: ERROR
     org.springframework: INFO
 
-
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 
 

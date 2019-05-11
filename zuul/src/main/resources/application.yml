@@ -1,5 +1,9 @@
 server:
   port: 8088
+info:
+  groupId: @project.groupId@
+  artifactId: @project.artifactId@
+  version: @project.version@
 eureka:
   client:
     healthcheck:
@@ -43,5 +47,12 @@ zuul:
 management:
   security:
     enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 

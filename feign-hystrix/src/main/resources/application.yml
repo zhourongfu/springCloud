@@ -1,6 +1,10 @@
 debug: false
 server:
   port: 8081
+info:
+  groupId: @project.groupId@
+  artifactId: @project.artifactId@
+  version: @project.version@
 eureka:
   client:
     healthcheck:
@@ -57,11 +61,11 @@ logging:
 management:
   security:
     enabled: false
-  health:
-    redis:
-      enabled: true
-    rabbit:
-      enabled: false
-    db:
-      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
