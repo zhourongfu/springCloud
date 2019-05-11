@@ -10,8 +10,9 @@
     <artifactId>turbine</artifactId>
     <packaging>jar</packaging>
 
+    <version>1.0</version>
     <properties>
-        <dockerExposes>9101</dockerExposes>
+        <server.port>9101</server.port>
     </properties>
 
     <dependencies>

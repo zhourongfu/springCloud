@@ -1,6 +1,5 @@
 server:
-  context-path: /
-  port: 7000
+  port: @server.port@
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -54,9 +53,7 @@ security:
     password: cf123456
 
 logging:
-  file: ${log.dir:/data/logs}/${spring.application.name}.log
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR

@@ -9,11 +9,23 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.3.RELEASE</version>
   </parent>
+
   <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-	    <dockerImageName>${project.groupId}/${project.artifactId}</dockerImageName>
-	    <dockerVolumes>["/data/logs"]</dockerVolumes>
+	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	  <java.version>1.8</java.version>
+	  <server.port>8080</server.port>
+	  <log.dir>/data/logs</log.dir>
+
+	  <serverId>docker-aliyun</serverId>
+	  <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
+	  <registryName>weilus923</registryName>
+	  <dockerBaseImage>openjdk8</dockerBaseImage>
+	  <dockerMaintainer>646154945@qq.com</dockerMaintainer>
+	  <dockerHost>http://192.168.198.128:2375</dockerHost>
+	  <dockerVolumes>[${log.dir}]</dockerVolumes>
+	  <dockerExposes>${server.port}</dockerExposes>
+	  <dockerEntryPoint>["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]</dockerEntryPoint>
+
   </properties>
   <modules>
   		<module>eureka</module>
@@ -87,22 +99,15 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.0.0</version>
 				<configuration>
-					<dockerHost>http://192.168.198.128:2375</dockerHost>
-					<!--<dockerCertPath>E:\dockerCerts\192.168.198.3\client</dockerCertPath>-->
-					<baseImage>openjdk:8-jdk-alpine</baseImage>
-					<runs><run>echo 'Asia/Shanghai'>/etc/timezone</run></runs>
-					<entryPoint>
-						["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]
-					</entryPoint>
+					<skipDockerPush>true</skipDockerPush>
+					<pushImage>true</pushImage>
+					<imageName>${registryUrl}/${registryName}/${project.artifactId}:${project.version}</imageName>
 					<resources>
 						<resource>
 							<directory>${project.build.directory}</directory>
 							<include>${project.build.finalName}.jar</include>
 						</resource>
 					</resources>
-					<forceTags>true</forceTags>
-					<image>${project.groupId}/${project.artifactId}</image>
-					<newName>${project.groupId}/${project.artifactId}:${project.version}</newName>
 				</configuration>
 			</plugin>
 	     </plugins>

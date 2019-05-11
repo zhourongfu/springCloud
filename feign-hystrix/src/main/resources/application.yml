@@ -1,10 +1,11 @@
 debug: false
 server:
-  port: 8081
+  port: @server.port@
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
   version: @project.version@
+
 eureka:
   client:
     healthcheck:
@@ -49,9 +50,7 @@ feign-service:
     NFLoadBalancerRuleClassName: com.weilus.commons.ribbon.rules.DebugRibbonRule # DEBUG 优先策略
 
 logging:
-  file: ${log.dir:/data/logs}/${spring.application.name}.log
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
     root: INFO
     com.feign.clients: DEBUG

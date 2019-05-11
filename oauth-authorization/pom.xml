@@ -11,8 +11,9 @@
     <artifactId>oauth-authorization</artifactId>
     <packaging>jar</packaging>
 
+    <version>1.0</version>
     <properties>
-        <dockerExposes>8080</dockerExposes>
+        <server.port>8080</server.port>
     </properties>
 
     <dependencies>

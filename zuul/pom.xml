@@ -8,8 +8,9 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zuul</artifactId>
     <packaging>jar</packaging>
+    <version>1.0</version>
     <properties>
-        <dockerExposes>8088</dockerExposes>
+        <server.port>8088</server.port>
     </properties>
   
     <dependencies>

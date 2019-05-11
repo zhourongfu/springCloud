@@ -1,9 +1,10 @@
 server:
-  port: 8088
+  port: @server.port@
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
   version: @project.version@
+
 eureka:
   client:
     healthcheck:
@@ -26,24 +27,17 @@ hystrix:
       execution:
         isolation:
           strategy: SEMAPHORE
-logging:
-  file: ${log.dir:/data/logs}/${spring.application.name}.log
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n%ex"
-    file: ${logging.pattern.console}
-  level:
-    com.weilus: DEBUG
-    com.netflix.discovery: ERROR
-    org.springframework.security: ERROR
-
-
-
 zuul:
   add-host-header: true
   sensitive-headers: #无敏感 HttpHeader, 默认Cookie,Set-Cookie,Authorization,当前微服务自己实现鉴权
   add-proxy-headers: true
 
-
+logging:
+  file: ${log.dir:@log.dir@}/${spring.application.name}.log
+  level:
+    com.weilus: DEBUG
+    com.netflix.discovery: ERROR
+    org.springframework.security: ERROR
 management:
   security:
     enabled: false

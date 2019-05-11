@@ -8,8 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <version>1.0</version>
     <properties>
-        <dockerExposes>8081</dockerExposes>
+        <server.port>8081</server.port>
     </properties>
 
     <dependencies>

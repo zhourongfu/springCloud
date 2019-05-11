@@ -7,9 +7,10 @@
   </parent>
   <artifactId>eureka</artifactId>
 
-    <properties>
-        <dockerExposes>8761</dockerExposes>
-    </properties>
+  <version>1.0</version>
+  <properties>
+      <server.port>8761</server.port>
+  </properties>
 
     <dependencies>
       	<dependency>
