@@ -1,7 +1,5 @@
 server:
   port: @server.port@
-management:
-  port: @management.port@
 
 info:
   groupId: @project.groupId@
@@ -16,6 +14,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
+    service-url:
+      defaultZone: http://${security.user.name}:${security.user.password}@localhost:8761/eureka/
     healthcheck:
       enabled: true #开启健康检查(需要spring-boot-starter-actuator依赖)
   server:
@@ -26,11 +26,6 @@ eureka:
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
-    metadata-map:
-      user.name: ${security.user.name}
-      user.password: ${security.user.password}
-      management.context-path: ${management.context-path}
-      management.port: ${management.port}
 
 security:
   user:
@@ -45,25 +40,5 @@ logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
-    com.netflix.eureka: ERROR
+    com.netflix.eureka: DEBUG
     org.springframework: INFO
-
-management:
-  context-path: /mm
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
-
-security:
-  basic:
-    path: /mm
-  user:
-    name: sba-user
-    password: sba-pwd
-
-
-
