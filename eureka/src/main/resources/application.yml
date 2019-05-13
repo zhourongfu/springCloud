@@ -9,7 +9,6 @@ info:
 spring:
   application:
     name: eureka
-
 eureka:
   client:
     registerWithEureka: false
@@ -40,5 +39,5 @@ logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
-    com.netflix.eureka: DEBUG
+    com.netflix.eureka: ERROR
     org.springframework: INFO

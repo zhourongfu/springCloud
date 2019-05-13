@@ -8,21 +8,20 @@ info:
 spring:
   application:
     name: admin
+  boot:
+    admin:
+      discovery:
+        ignored-services: admin
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka:123456@127.0.0.1:8761/eureka/
+      defaultZone: http://eureka:123456@192.168.198.128:8761/eureka/
   instance:
     lease-renewal-interval-in-seconds: 10 #租赁更新时间间隔，默认30，即10秒发送一次心跳
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
-    metadata-map:
-#      user.name: ${security.user.name}
-#      user.password: ${security.user.password}
-      management.context-path: ${management.context-path}
-      management.port: ${management.port}
 
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
@@ -34,19 +33,8 @@ logging:
 management:
   security:
     enabled: false
-  port: @management.port@
-  context-path: /mm
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
 
-#security:
-#  basic:
-#    path: /mm
-#  user:
-#    name: admin
-#    password: 123456
+security:
+  user:
+    name: admin
+    password: admin
