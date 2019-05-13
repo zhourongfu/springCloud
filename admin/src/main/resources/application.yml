@@ -1,5 +1,8 @@
 server:
   port: @server.port@
+management:
+  port: @management.port@
+
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -10,8 +13,14 @@ spring:
     name: admin
   boot:
     admin:
+      discovery:
+        converter:
+          management-context-path: /mm
       ui:
         title: 服务监控中心
+      metadata-keys-to-sanitize:
+
+
 eureka:
   client:
     serviceUrl:
@@ -21,6 +30,11 @@ eureka:
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
+      management.context-path: ${management.context-path}
+      management.port: ${management.port}
 
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
@@ -29,9 +43,10 @@ logging:
     com.netflix.discovery: ERROR
     org.springframework: INFO
 
+
+
 management:
-  security:
-    enabled: false
+  context-path: /mm
   endpoints:
     web:
       exposure:
@@ -42,4 +57,7 @@ management:
 
 security:
   basic:
-    enabled:
+    path: /mm
+  user:
+    name: sba-user
+    password: sba-pwd

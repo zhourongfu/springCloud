@@ -1,6 +1,9 @@
 debug: false
 server:
   port: @server.port@
+management:
+  port: @management.port@
+
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -58,8 +61,7 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  security:
-    enabled: false
+  context-path: /mm
   endpoints:
     web:
       exposure:
@@ -67,4 +69,11 @@ management:
   endpoint:
     health:
       show-details: always
+
+security:
+  basic:
+    path: /mm
+  user:
+    name: sba-user
+    password: sba-pwd
 
