@@ -4,6 +4,7 @@ import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.turbine.EnableTurbine;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @SpringBootApplication
 @EnableAdminServer
 @EnableEurekaClient
+@EnableTurbine
 public class Application {
 
     public static void main(String[] args) {
@@ -36,7 +38,7 @@ public class Application {
 
             // Requests for the login page and the static assets are allowed
             http.authorizeRequests()
-                    .antMatchers("/login.html", "/**/*.css", "/img/**", "/third-party/**","/api/**")
+                    .antMatchers("/login.html", "/**/*.css", "/img/**", "/third-party/**")
                     .permitAll();
             // ... and any other request needs to be authorized
             http.authorizeRequests().antMatchers("/**").authenticated();

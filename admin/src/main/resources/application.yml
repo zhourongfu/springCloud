@@ -11,7 +11,9 @@ spring:
   boot:
     admin:
       discovery:
-        ignored-services: admin
+        ignored-services: ${spring.application.name}
+      turbine:
+        location: ${spring.application.name}
 
 eureka:
   client:
@@ -22,6 +24,12 @@ eureka:
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
+
+turbine:
+  appConfig: serviceCustomer
+  aggregator:
+    clusterConfig: TEST-TURBINE
+  clusterNameExpression: metadata['cluster']
 
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
