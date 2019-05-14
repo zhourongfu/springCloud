@@ -35,7 +35,6 @@
   		<module>config</module>
 	  	<module>oauth-authorization</module>
 	  	<module>oauth-resource</module>
-	    <module>turbine</module>
 	  	<module>feign-hystrix</module>
 	    <module>admin</module>
   </modules>

@@ -12,10 +12,11 @@ eureka:
       # HttpHeader 非debug=true请求(正常请求): 正常的会排除掉该服务
       # HttpHeader debug=true请求头(debug请求): debug请求优先选择调用该服务，找不到debug则选择正常实例
       debug: true
-      user.name: ${security.user.name}
-      user.password: ${security.user.password}
-      management.context-path: ${management.context-path}
-      management.port: ${management.port}
+      user:
+        name: ${security.user.name}
+        password: ${security.user.password}
+      management:
+        context-path: ${management.context-path}
 
 spring:
   profiles:
