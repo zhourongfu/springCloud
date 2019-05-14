@@ -59,7 +59,7 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  context-path: /admin
+  context-path: /actuator
   endpoints:
     web:
       exposure:

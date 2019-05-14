@@ -1,8 +1,6 @@
 debug: false
 server:
   port: @server.port@
-management:
-  port: @management.port@
 
 info:
   groupId: @project.groupId@
@@ -19,7 +17,7 @@ spring:
     cache: false
 
 logging:
-  file: ${log.dir:@log.dir@}/${spring.application.name}.logd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
@@ -29,7 +27,7 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  context-path: /mm
+  context-path: /actuator
   endpoints:
     web:
       exposure:
@@ -39,8 +37,6 @@ management:
       show-details: always
 
 security:
-  basic:
-    path: /mm
   user:
     name: sba-user
     password: sba-pwd

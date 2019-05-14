@@ -9,11 +9,12 @@ eureka:
     instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
     metadata-map:
       cluster: TEST-TURBINE
-      user.name: ${security.user.name}
-      user.password: ${security.user.password}
-      management.context-path: ${management.context-path}
-      management.port: ${management.port}
-      
+      user:
+        name: ${security.user.name}
+        password: ${security.user.password}
+      management:
+        context-path: ${management.context-path}
+
 spring:
   profiles:
     active: test

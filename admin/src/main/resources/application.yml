@@ -20,7 +20,7 @@ spring:
 
 turbine:
   appConfig: FEIGN-CALL
-  instanceUrlSuffix: admin/hystrix.stream              #  managemant.context-path/hystrix.stream
+  instanceUrlSuffix: actuator/hystrix.stream              #  managemant.context-path/hystrix.stream
   aggregator:
     clusterConfig: TEST-TURBINE,FEIGN
   clusterNameExpression: metadata['cluster']

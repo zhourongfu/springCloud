@@ -1,8 +1,6 @@
 debug: false
 server:
   port: @server.port@
-management:
-  port: @management.port@
 
 info:
   groupId: @project.groupId@
@@ -59,7 +57,7 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  context-path: /mm
+  context-path: /actuator
   endpoints:
     web:
       exposure:
@@ -69,8 +67,6 @@ management:
       show-details: always
 
 security:
-  basic:
-    path: /mm
   user:
     name: sba-user
     password: sba-pwd
