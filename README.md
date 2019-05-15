@@ -26,9 +26,31 @@ rabbitmq:3-management
 ```
 
 ### 用户中心 oauth2
-> 1. 用户登录          oauth2 密码模式
-> 2. 授权登录          oauth2 授权码模式
-> 3. 授权微服务访问     oauth2 客户端模式
+
+#### 用户申请令牌
+```
+curl -X POST -d 'grant_type=password&client_id=acme&username=liutaiq&password=123456' \
+http://acme:acmesecret@127.0.0.1:8080/oauth/token
+```
+
+#### 受信任的机构申请令牌
+```
+curl -X POST -d 'grant_type=client_credentials' \
+http://accc:acccsecret@127.0.0.1:8080/oauth/token
+```
+
+#### 授权码申请令牌
+
+> 引导用户授权
+```
+http://127.0.0.1:8080/oauth/authorize?client_id=acau&response_type=code&scope=user_info&redirect_uri=http://aa.ccdd
+```
+
+> 机构获取授权码; 申请令牌
+```
+curl -X POST -d 'grant_type=authorization_code&code=pg4Vz2&redirect_uri=http://aa.ccdd'  \
+http://acau:acausecret@127.0.0.1:8080/oauth/token
+```
 
 ### 网关 zuul
 
@@ -50,10 +72,9 @@ docker run -d --name=feign-call \
 weilus.cloud/feign-hystrix
 ```
 
-### 熔断监控 turbine
+### 微服务监控 admin
 
-> 1. 监控hystrix消费服务状况
+    spring-boot-admin发现eureka服务并监控;
 
-    消费者集群TEST-TURBINE
-    访问 http://127.0.0.1:9101/hystrix
-    输入监控流 http://127.0.0.1:9101/turbine.stream?cluster=TEST-TURBINE
+    spring-boot-admin集成turbine; 监控熔断器
+

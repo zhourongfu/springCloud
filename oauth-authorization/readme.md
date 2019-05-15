@@ -1,5 +1,19 @@
-curl -X POST -H "Authorization: Basic YWNtZTphY21lc2VjcmV0" -d "grant_type=password&client_id=acme&username=liutaiq&password=123321" "http://192.168.198.1:8080/oauth/token"
+### 用户申请令牌
+
+curl -X POST -d 'grant_type=password&client_id=acme&username=liutaiq&password=123456' \
+http://acme:acmesecret@127.0.0.1:8080/oauth/token
 
 
-curl -d 'grant_type=authorization_code&client_id=a10086&scope=user_info&redirect_uri=http://aa.ccdd&code=pg4Vz2'  \
- http://a10086:aabcc@192.168.100.3:8080/oauth/token
+### 受信任的机构申请令牌
+curl -X POST -d 'grant_type=client_credentials' \
+http://accc:acccsecret@127.0.0.1:8080/oauth/token
+
+
+### 授权码申请令牌
+
+> 引导用户授权
+http://127.0.0.1:8080/oauth/authorize?client_id=acau&response_type=code&scope=user_info&redirect_uri=http://aa.ccdd
+
+> 机构获取授权码; 申请令牌
+curl -X POST -d 'grant_type=authorization_code&code=pg4Vz2&redirect_uri=http://aa.ccdd'  \
+http://acau:acausecret@127.0.0.1:8080/oauth/token
