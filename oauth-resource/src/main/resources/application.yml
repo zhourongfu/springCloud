@@ -35,6 +35,9 @@ hystrix:
           strategy: SEMAPHORE #信号量隔离模式
 
 security:
+  user:
+    name: sba-user
+    password: sba-pwd
   metadata-source:
     no-check-token:
     - GET /teee1
@@ -65,8 +68,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-security:
-  user:
-    name: sba-user
-    password: sba-pwd

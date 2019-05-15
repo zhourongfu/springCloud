@@ -24,7 +24,7 @@ public class Application {
 
 	@RequestMapping("/me")
 	public @ResponseBody Object getUser(){
-		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return SecurityContextHolder.getContext().getAuthentication();
 	}
 
 }

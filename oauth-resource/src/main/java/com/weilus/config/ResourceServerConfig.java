@@ -30,7 +30,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 String pattern = s;
                 if (s.indexOf(" ") != -1) {
                     String[] arr = StringUtils.delimitedListToStringArray(s, " ");
-                    httpmethod = StringUtils.hasText(arr[0]) ? HttpMethod.valueOf(arr[0]) : null;
+                    httpmethod = HttpMethod.valueOf(arr[0]);
                     pattern = arr[1];
                 }
                 registry.antMatchers(httpmethod, pattern).permitAll();
