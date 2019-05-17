@@ -13,6 +13,6 @@ import java.util.Map;
 public class OauthClientFallBack implements OauthClient {
     @Override
     public Map checkToken(String token) {
-        return Collections.singletonMap("error","ffffffffffffffffffffffffffffffffffffffffffffffffff");
+        return Collections.singletonMap("error","oauth认证中心不可用!");
     }
 }

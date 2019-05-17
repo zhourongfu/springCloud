@@ -19,7 +19,7 @@ import java.util.Map;
  *#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ZoneAvoidanceRule  默认策略
  *#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule     随机策略
  *     NFLoadBalancerRuleClassName: com.weilus.serviceCustomer.GrayRibbonRule   灰度策略
- *
+ *l
  * #Hystrix隔离策略=信号量隔离
  * hystrix:
  *  command:
