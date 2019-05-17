@@ -16,17 +16,21 @@ eureka:
     lease-renewal-interval-in-seconds: 10 #租赁更新时间间隔，默认30，即10秒发送一次心跳
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
+    instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ip-address}}:${server.port}
     metadata-map:
       user:
-        name: ${security.user.name}
-        password: ${security.user.password}
+        name: ${spring.security.user.name}
+        password: ${spring.security.user.password}
       management:
-        context-path: ${management.context-path}
+        context-path: ${management.server.servlet.context-path}
 
 spring:
   application:
     name: config
+  security:
+    user:
+      name: config
+      password: cf123456
   profiles:
     active: jdbc
   datasource:
@@ -52,12 +56,6 @@ spring:
     username: guest
     password: guest
 
-
-security:
-  user:
-    name: config
-    password: cf123456
-
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
@@ -66,7 +64,6 @@ logging:
     org.springframework: INFO
 
 management:
-  context-path: /actuator
   endpoints:
     web:
       exposure:
@@ -74,3 +71,6 @@ management:
   endpoint:
     health:
       show-details: always
+  server:
+    servlet:
+      context-path: /actuator

@@ -9,12 +9,17 @@ info:
 spring:
   application:
     name: eureka
+  security:
+    user:
+      name: eureka
+      password: 123456
+
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
     service-url:
-      defaultZone: http://${security.user.name}:${security.user.password}@localhost:8761/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8761/eureka/
     healthcheck:
       enabled: true #开启健康检查(需要spring-boot-starter-actuator依赖)
   server:
@@ -24,12 +29,7 @@ eureka:
     lease-renewal-interval-in-seconds: 10 #租赁更新时间间隔，默认30，即10秒发送一次心跳
     lease-expiration-duration-in-seconds: 60  #租期到期时间，默认90秒
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ipAddress}}:${server.port}
-
-security:
-  user:
-    name: eureka
-    password: 123456
+    instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ip-address}}:${server.port}
 
 endpoints:
   restart:
