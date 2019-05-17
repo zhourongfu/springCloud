@@ -8,6 +8,10 @@ info:
 spring:
   application:
     name: admin
+  security:
+    user:
+      name: admin
+      password: admin
   boot:
     admin:
       routes:
@@ -41,12 +45,3 @@ logging:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
     org.springframework: INFO
-
-management:
-  security:
-    enabled: false
-
-security:
-  user:
-    name: admin
-    password: admin

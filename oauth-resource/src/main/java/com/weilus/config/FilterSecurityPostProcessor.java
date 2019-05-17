@@ -28,8 +28,8 @@ public class FilterSecurityPostProcessor implements ObjectPostProcessor<FilterSe
 
     @Override
     public FilterSecurityInterceptor postProcess(FilterSecurityInterceptor interceptor) {
-        interceptor.setAccessDecisionManager(accessDecisionManager());
-        interceptor.setSecurityMetadataSource(securityMetadataSource());
+//        interceptor.setAccessDecisionManager(accessDecisionManager());
+//        interceptor.setSecurityMetadataSource(securityMetadataSource());
         return interceptor;
     }
 
