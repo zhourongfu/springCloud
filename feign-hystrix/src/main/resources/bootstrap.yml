@@ -13,10 +13,10 @@ eureka:
       # HttpHeader debug=true请求头(debug请求): debug请求优先选择调用该服务，找不到debug则选择正常实例
       debug: true
       user:
-        name: ${security.user.name}
-        password: ${security.user.password}
+        name: ${spring.security.user.name}
+        password: ${spring.security.user.password}
       management:
-        context-path: ${management.context-path}
+        context-path: ${management.server.servlet.context-path}
 
 spring:
   profiles:

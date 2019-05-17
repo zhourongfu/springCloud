@@ -1,12 +1,15 @@
 server:
   port: @server.port@
-management:
-  port: @management.port@
-
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
   version: @project.version@
+
+spring:
+  security:
+    user:
+      name: sba-user
+      password: sba-pwd
 
 eureka:
   client:
@@ -43,7 +46,6 @@ logging:
     org.springframework.security: ERROR
 
 management:
-  context-path: /mm
   endpoints:
     web:
       exposure:
@@ -51,12 +53,9 @@ management:
   endpoint:
     health:
       show-details: always
+  server:
+    servlet:
+      context-path: /actuator
 
-security:
-  basic:
-    path: /mm
-  user:
-    name: sba-user
-    password: sba-pwd
 
 

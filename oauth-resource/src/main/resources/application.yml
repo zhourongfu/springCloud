@@ -15,7 +15,10 @@ eureka:
 spring:
   thymeleaf:
     cache: false
-
+  security:
+    user:
+      name: sba-user
+      password: sba-pwd
 feign:
   hystrix:
     enabled: true
@@ -35,9 +38,6 @@ hystrix:
           strategy: SEMAPHORE #信号量隔离模式
 
 security:
-  user:
-    name: sba-user
-    password: sba-pwd
   metadata-source:
     no-check-token:
     - GET /teee1
@@ -60,7 +60,6 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  context-path: /actuator
   endpoints:
     web:
       exposure:
@@ -68,3 +67,6 @@ management:
   endpoint:
     health:
       show-details: always
+  server:
+    servlet:
+      context-path: /actuator

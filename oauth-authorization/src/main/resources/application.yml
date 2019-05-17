@@ -15,7 +15,10 @@ eureka:
 spring:
   thymeleaf:
     cache: false
-
+  security:
+    user:
+      name: sba-user
+      password: sba-pwd
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
@@ -27,7 +30,6 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  context-path: /actuator
   endpoints:
     web:
       exposure:
@@ -35,8 +37,6 @@ management:
   endpoint:
     health:
       show-details: always
-
-security:
-  user:
-    name: sba-user
-    password: sba-pwd
+  server:
+    servlet:
+      context-path: /actuator

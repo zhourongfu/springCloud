@@ -1,7 +1,6 @@
 debug: false
 server:
   port: @server.port@
-
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -19,12 +18,12 @@ spring:
     addresses: 192.168.198.128:5672
     username: guest
     password: guest
-security:
-  basic:
-    path: /sayHello,/hiMan,${management.context-path}
-  user:
-    name: fadffsedfsf
-    password: rrfdaDSFfesnmhf
+  security:
+    basic:
+      path: /sayHello,/hiMan,${management.context-path}
+    user:
+      name: fadffsedfsf
+      password: rrfdaDSFfesnmhf
 
 feign:
   hystrix:
@@ -59,7 +58,6 @@ logging:
     org.springframework.jdbc: DEBUG
 
 management:
-  context-path: /actuator
   endpoints:
     web:
       exposure:
@@ -67,3 +65,6 @@ management:
   endpoint:
     health:
       show-details: always
+  server:
+    servlet:
+      context-path: /actuator
