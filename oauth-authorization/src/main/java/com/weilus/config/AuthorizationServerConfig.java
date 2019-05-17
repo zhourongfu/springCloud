@@ -81,10 +81,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         });
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("123456"));
-    }
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance());

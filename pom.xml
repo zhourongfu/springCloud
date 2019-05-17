@@ -21,17 +21,17 @@
 	  <maven.test.skip>true</maven.test.skip>
 	  <java.version>1.8</java.version>
 	  <server.port>8080</server.port>
-	  <management.port>20000</management.port>
 	  <log.dir>/data/logs</log.dir>
 
 	  <serverId>docker-aliyun</serverId>
 	  <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
+	  <dockerHost>https://192.168.198.128:2375</dockerHost>
+	  <dockerCertPath>E:\dockerCerts\192.168.198.128\client</dockerCertPath>
 	  <registryName>weilus923</registryName>
-	  <dockerBaseImage>openjdk8</dockerBaseImage>
+	  <dockerBaseImage>openjdk:8-jdk-alpine</dockerBaseImage>
 	  <dockerMaintainer>646154945@qq.com</dockerMaintainer>
-	  <dockerHost>http://192.168.198.128:2375</dockerHost>
 	  <dockerVolumes>[${log.dir}]</dockerVolumes>
-	  <dockerExposes>${server.port},${management.port}</dockerExposes>
+	  <dockerExposes>${server.port}</dockerExposes>
 	  <dockerEntryPoint>["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]</dockerEntryPoint>
 
   </properties>
