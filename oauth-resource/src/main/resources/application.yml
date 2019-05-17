@@ -67,6 +67,3 @@ management:
   endpoint:
     health:
       show-details: always
-  server:
-    servlet:
-      context-path: /actuator

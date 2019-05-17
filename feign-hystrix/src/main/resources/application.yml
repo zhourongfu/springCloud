@@ -19,8 +19,6 @@ spring:
     username: guest
     password: guest
   security:
-    basic:
-      path: /sayHello,/hiMan,${management.context-path}
     user:
       name: fadffsedfsf
       password: rrfdaDSFfesnmhf
@@ -65,6 +63,3 @@ management:
   endpoint:
     health:
       show-details: always
-  server:
-    servlet:
-      context-path: /actuator

@@ -12,8 +12,6 @@ eureka:
       user:
         name: ${spring.security.user.name}
         password: ${spring.security.user.password}
-      management:
-        context-path: ${management.server.servlet.context-path}
 
 spring:
   profiles:
