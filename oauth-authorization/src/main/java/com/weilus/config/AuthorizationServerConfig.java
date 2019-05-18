@@ -62,8 +62,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public UserDetailsService userDetailsService(@Autowired DataSource dataSource){
         JdbcDaoImpl dao =new JdbcDaoImpl();
         dao.setDataSource(dataSource);
-        dao.setEnableGroups(true);
         dao.setRolePrefix("ROLE_");
+//        dao.setUsersByUsernameQuery("select * from example");//自定义查询用户
+//        dao.setAuthoritiesByUsernameQuery("select * example ");//自定义查询用户权限
+//        dao.setEnableGroups(true);
+//        dao.setGroupAuthoritiesByUsernameQuery("select * example ");//自定义查询用户角色
         return dao;
     }
 
