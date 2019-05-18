@@ -38,7 +38,9 @@ public class SecurityMetadataSourcePropertity {
         if(!CollectionUtils.isEmpty(rules)){
             rules.entrySet().forEach(e->{
                 String[] arr = StringUtils.delimitedListToStringArray(e.getKey()," ");
-                requestMap.put(new AntPathRequestMatcher(arr[1],arr[0]),
+                String pattern = arr.length == 1 ? arr[0] : arr[1];
+                String httpMethod = arr.length == 1 ? null : arr[0];
+                requestMap.put(new AntPathRequestMatcher(pattern,httpMethod),
                         SecurityConfig.createListFromCommaDelimitedString(e.getValue()));
             });
         }
