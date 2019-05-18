@@ -10,6 +10,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,8 +36,8 @@ import javax.sql.DataSource;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizationServerConfig.class);
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Autowired
     private RedisConnectionFactory connectionFactory;
     @Autowired
@@ -54,7 +55,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(new RedisTokenStore(connectionFactory));
         tokenServices.setClientDetailsService(clientDetailsService);
-//        tokenServices.setAuthenticationManager(authenticationManager);
         return tokenServices;
     }
 
@@ -69,21 +69,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-//        endpoints.authenticationManager(authenticationManager);
+        endpoints.authenticationManager(authenticationManager);
         endpoints.userDetailsService(userDetailsService);
         endpoints.tokenStore(new RedisTokenStore(connectionFactory));
         endpoints.tokenServices(tokenServices);
         endpoints.authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource));
-        endpoints.exceptionTranslator(new WebResponseExceptionTranslator() {
-            public ResponseEntity translate(Exception e) throws Exception {
-                return new ResponseEntity(e.getMessage(), HttpStatus.OK);
-            }
-        });
+        endpoints.exceptionTranslator((e)-> new ResponseEntity(e.getMessage(), HttpStatus.OK));
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        clients.jdbc(dataSource);
     }
 
     @Override

@@ -15,5 +15,5 @@ http://accc:acccsecret@127.0.0.1:8080/oauth/token
 http://127.0.0.1:8080/oauth/authorize?client_id=acau&response_type=code&scope=user_info&redirect_uri=http://aa.ccdd
 
 > 机构获取授权码; 申请令牌
-curl -X POST -d 'grant_type=authorization_code&code=pg4Vz2&redirect_uri=http://aa.ccdd'  \
+curl -X POST -d 'grant_type=authorization_code&code=OFHeI1&redirect_uri=http://aa.ccdd'  \
 http://acau:acausecret@127.0.0.1:8080/oauth/token
