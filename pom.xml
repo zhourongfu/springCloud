@@ -39,7 +39,7 @@
   		<module>eureka</module>
 	  	<module>zuul</module>
   		<module>config</module>
-	  	<module>oauth-authorization</module>
+	  	<module>auth</module>
 	  	<module>oauth-resource</module>
 	  	<module>feign-hystrix</module>
 	    <module>admin</module>
