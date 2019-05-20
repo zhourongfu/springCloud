@@ -41,41 +41,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private RedisConnectionFactory connectionFactory;
     @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private ClientDetailsService clientDetailsService;
-    @Autowired
     private DataSource dataSource;
-    @Autowired
-    private DefaultTokenServices tokenServices;
-
-    @Bean
-    @Primary
-    public DefaultTokenServices tokenServices(@Autowired JedisConnectionFactory connectionFactory){
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setTokenStore(new RedisTokenStore(connectionFactory));
-        tokenServices.setClientDetailsService(clientDetailsService);
-        return tokenServices;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(@Autowired DataSource dataSource){
-        JdbcDaoImpl dao =new JdbcDaoImpl();
-        dao.setDataSource(dataSource);
-        dao.setRolePrefix("ROLE_");
-//        dao.setUsersByUsernameQuery("select * from example");//自定义查询用户
-//        dao.setAuthoritiesByUsernameQuery("select * example ");//自定义查询用户权限
-//        dao.setEnableGroups(true);
-//        dao.setGroupAuthoritiesByUsernameQuery("select * example ");//自定义查询用户角色
-        return dao;
-    }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager);
-        endpoints.userDetailsService(userDetailsService);
         endpoints.tokenStore(new RedisTokenStore(connectionFactory));
-        endpoints.tokenServices(tokenServices);
         endpoints.authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource));
         endpoints.exceptionTranslator((e)-> new ResponseEntity(e.getMessage(), HttpStatus.OK));
     }

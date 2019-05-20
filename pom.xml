@@ -25,8 +25,8 @@
 
 	  <serverId>docker-aliyun</serverId>
 	  <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
-	  <dockerHost>https://192.168.198.128:2375</dockerHost>
-	  <dockerCertPath>E:\dockerCerts\192.168.198.128\client</dockerCertPath>
+	  <dockerHost>http://192.168.198.128:2375</dockerHost>
+	  <!--<dockerCertPath>E:\dockerCerts\192.168.198.128\client</dockerCertPath>-->
 	  <registryName>weilus923</registryName>
 	  <dockerBaseImage>openjdk:8-jdk-alpine</dockerBaseImage>
 	  <dockerMaintainer>646154945@qq.com</dockerMaintainer>
