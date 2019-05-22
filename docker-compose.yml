@@ -1,0 +1,89 @@
+version: "2"
+services:
+  eureka:
+    image: weilus923/eureka:1.0
+    container_name: eureka
+    ports:
+      - 8761:8761
+    environment:
+      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+    volumes:
+      - /data/logs:/data/logs
+
+  config:
+    image: weilus923/config:1.0
+    container_name: config
+    ports:
+      - 7000:7000
+    environment:
+      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+    volumes:
+      - /data/logs:/data/logs
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq
+
+  auth:
+    image: weilus923/auth:1.0
+    container_name: auth
+    ports:
+      - 8080:8080
+    environment:
+      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+    volumes:
+      - /data/logs:/data/logs
+    depends_on:
+      - rabbitmq
+      - redis
+      - mysql
+      - eureka
+      - config
+
+  zuul:
+    image: weilus923/zuul:1.0
+    container_name: zuul
+    ports:
+      - 8088:8088
+    environment:
+      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+    volumes:
+      - /data/logs:/data/logs
+    depends_on:
+      - eureka
+      - config
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    command: mysqld --lower_case_table_names=1
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/mysql/mysql-cnf:/etc/mysql/conf.d
+      - /data/mysql/mysql-data:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=weilus
+    privileged: true
+
+
+  redis:
+    image: redis
+    container_name: redis
+    command: redis-server --requirepass '123456'
+    ports:
+      - 6379:6379
+    environment:
+      - /data/redis/redis-data:/data
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest

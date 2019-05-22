@@ -21,7 +21,6 @@ spring:
     name: oauth
   cloud:
     config:
-      fail-fast: true
       discovery:
         enabled: true
         service-id: config
