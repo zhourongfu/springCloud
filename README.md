@@ -17,7 +17,11 @@ rabbitmq:3-management
 
 > 2. 变更config配置,使配置自动生效
 ```
+    version 1.5.x
     curl -X POST http://config:cf123456@192.168.198.1:7000/bus/refresh?destination=gateway:**
+
+    version 2.x
+    curl -v -X POST http://config:cf123456@192.168.198.1:7000/actuator/bus-refresh/gateway:**
 ```
 
 > 3. 向eureka指定IP:  EUREKA_INSTANCE_IP-ADDRESS
