@@ -56,8 +56,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.jdbc(dataSource);
     }
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("permitAll()");
-    }
+//    @Override
+//    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+//        security.checkTokenAccess("permitAll()");
+//    }
 }

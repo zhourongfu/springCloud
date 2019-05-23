@@ -28,6 +28,8 @@ feign:
         logger-level: full    #NONE,BASIC,HEADERS,FULL
         connect-timeout: 30000    #连接超时
         read-timeout:  10000      #响应超时
+#        username: sba-user
+#        password: sba-pwd
         request-interceptors:
           - com.weilus.commons.feign.interceptors.DebugRequestInterceptor      #传递DEBUG参数到下一个服务
 hystrix:
@@ -52,12 +54,10 @@ security:
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:
+    com.feign.clients: DEBUG
     com.weilus: DEBUG
-    com.netflix.discovery: ERROR
-    org.springframework: INFO
-    org.springframework.security: DEBUG
-    org.apache.ibatis: INFO
     org.springframework.jdbc: DEBUG
+    com.netflix.discovery: ERROR
 
 management:
   endpoints:

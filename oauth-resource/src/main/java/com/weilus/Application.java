@@ -6,9 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Collections;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -24,20 +29,20 @@ public class Application {
 	@Autowired
 	TestProperties properties;
 
-//	@RequestMapping("/me")
+	@RequestMapping("/me")
 //	@PreAuthorize("#oauth2.hasScope('oauth-test')")
-//	public @ResponseBody Object getUser(){
-//		return SecurityContextHolder.getContext().getAuthentication();
-//	}
-//
-//	@RequestMapping("/client")
-//	@PreAuthorize("#oauth2.hasScope('resource')")
-//	public @ResponseBody Object client(){
-//		return SecurityContextHolder.getContext().getAuthentication();
-//	}
+	public @ResponseBody Object getUser(){
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
+
+	@RequestMapping("/client")
+	@PreAuthorize("#oauth2.hasScope('resource')")
+	public @ResponseBody Object client(){
+		return SecurityContextHolder.getContext().getAuthentication();
+	}
 
 	@GetMapping("test")
 	public @ResponseBody Object test(){
-		return properties;
+		return Collections.singletonMap(properties.getName(),properties.getAge());
 	}
 }
