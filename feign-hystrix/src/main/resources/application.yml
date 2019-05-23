@@ -18,10 +18,6 @@ spring:
     addresses: 192.168.198.128:5672
     username: guest
     password: guest
-  security:
-    user:
-      name: fadffsedfsf
-      password: rrfdaDSFfesnmhf
 
 feign:
   hystrix:
@@ -32,8 +28,9 @@ feign:
         logger-level: full    #NONE,BASIC,HEADERS,FULL
         connect-timeout: 30000    #连接超时
         read-timeout:  10000      #响应超时
+        username: adfeadcclk
+        password: asdf@#$@ASDfad
         request-interceptors:
-          - com.weilus.commons.feign.interceptors.AuthFeignServiceInterceptor  #访问的账号密码
           - com.weilus.commons.feign.interceptors.DebugRequestInterceptor      #传递DEBUG参数到下一个服务
 
 hystrix:

@@ -5,12 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.weilus","com.feign.fallbacks"})
 @EnableEurekaClient
 @EnableFeignClients(basePackages="com.feign.clients")
-@ComponentScan({"com.weilus","com.feign.fallbacks"})
 @EnableHystrix
 public class Application {
 

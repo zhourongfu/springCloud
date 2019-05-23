@@ -11,16 +11,13 @@ eureka:
       cluster: TEST-TURBINE
       # HttpHeader 非debug=true请求(正常请求): 正常的会排除掉该服务
       # HttpHeader debug=true请求头(debug请求): debug请求优先选择调用该服务，找不到debug则选择正常实例
-      debug: true
-      user:
-        name: ${spring.security.user.name}
-        password: ${spring.security.user.password}
+      # debug: true
 
 spring:
   profiles:
     active: test
   application:
-    name: feign-call
+    name: feign-service
   cloud:
     config:
       fail-fast: true

@@ -28,6 +28,7 @@ spring:
       password: cf123456
       profile: ${spring.profiles.active}
       label: master
+      fail-fast: true
     bus:
       trace:
         enabled: true #配置变化跟踪
