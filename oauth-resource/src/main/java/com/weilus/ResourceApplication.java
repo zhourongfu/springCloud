@@ -20,10 +20,10 @@ import java.util.Collections;
 @EnableFeignClients(basePackages="com.feign.clients")
 @ComponentScan({"com.weilus","com.feign.fallbacks"})
 @Controller
-public class Application {
+public class ResourceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(ResourceApplication.class, args);
 	}
 
 	@Autowired

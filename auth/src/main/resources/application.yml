@@ -15,10 +15,7 @@ eureka:
 spring:
   thymeleaf:
     cache: false
-  security:
-    user:
-      name: sba-user
-      password: sba-pwd
+
 logging:
   file: ${log.dir:@log.dir@}/${spring.application.name}.log
   level:

@@ -13,6 +13,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 import javax.sql.DataSource;
 
+import static org.apache.coyote.http11.Constants.a;
+import static org.springframework.security.config.http.MatcherType.ant;
+
 /**
  * Created by liutq on 2018/10/23.
  */
@@ -26,11 +29,14 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf().ignoringAntMatchers("/actuator/**")
+                .and()
+                .antMatcher("/actuator/**").antMatcher("/oauth/check_token").httpBasic()
+                .and()
                 .authorizeRequests().mvcMatchers("/oauth/authorize").authenticated()
                 .and()
                 .formLogin().loginPage("/login").passwordParameter("password").usernameParameter("username");
-
     }
 
     @Override

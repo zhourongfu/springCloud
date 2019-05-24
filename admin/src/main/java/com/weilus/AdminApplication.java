@@ -15,9 +15,9 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
 @EnableEurekaClient
 @EnableTurbine
 @EnableAdminServer
-public class Application {
+public class AdminApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 }
