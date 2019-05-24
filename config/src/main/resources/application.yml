@@ -29,6 +29,8 @@ spring:
     user:
       name: config
       password: cf123456
+      roles: USER
+
   profiles:
     active: jdbc
   datasource:

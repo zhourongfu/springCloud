@@ -15,7 +15,6 @@
 	  <de.codecentric.version>2.1.4</de.codecentric.version>
 	  <de.codecentric.ui.version>1.5.7</de.codecentric.ui.version>
 	  <cloud.sleuth.version>2.1.1.RELEASE</cloud.sleuth.version>
-	  <cloud.oauth2.version>2.3.5.RELEASE</cloud.oauth2.version>
 
 	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	  <maven.test.skip>true</maven.test.skip>

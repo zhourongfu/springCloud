@@ -18,7 +18,11 @@ spring:
     addresses: 192.168.198.128:5672
     username: guest
     password: guest
-
+  security:
+    user:
+      name: hystrix
+      password: hy123456
+      roles: USER
 feign:
   hystrix:
     enabled: true #开启熔断
