@@ -16,10 +16,10 @@ public class EurekaApplication {
 
 	@EnableWebSecurity
 	static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().ignoringAntMatchers("/eureka/**");
+			http.csrf().ignoringAntMatchers("/eureka/**","/actuator/**");
+			http.authorizeRequests().mvcMatchers("/actuator/info","/actuator/health").permitAll();
 			super.configure(http);
 		}
 	}
