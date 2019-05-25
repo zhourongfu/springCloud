@@ -1,6 +1,6 @@
 debug: false
 server:
-  port: @server.port@
+  port: 8081
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -49,7 +49,7 @@ feign-service:
     NFLoadBalancerRuleClassName: com.weilus.commons.ribbon.rules.DebugRibbonRule # DEBUG 优先策略
 
 logging:
-  file: ${log.dir:@log.dir@}/${spring.application.name}.log
+  file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
     root: INFO
     com.feign.clients: DEBUG

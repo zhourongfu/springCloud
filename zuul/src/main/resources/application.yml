@@ -1,5 +1,5 @@
 server:
-  port: @server.port@
+  port: 8088
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -39,7 +39,7 @@ zuul:
   add-proxy-headers: true
 
 logging:
-  file: ${log.dir:@log.dir@}/${spring.application.name}.log
+  file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR

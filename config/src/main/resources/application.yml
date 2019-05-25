@@ -1,5 +1,5 @@
 server:
-  port: @server.port@
+  port: 7000
 
 info:
   groupId: @project.groupId@
@@ -57,7 +57,7 @@ spring:
     password: guest
 
 logging:
-  file: ${log.dir:@log.dir@}/${spring.application.name}.log
+  file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR

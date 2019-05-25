@@ -1,5 +1,5 @@
 server:
-  port: @server.port@
+  port: 8888
 info:
   groupId: @project.groupId@
   artifactId: @project.artifactId@
@@ -40,7 +40,7 @@ eureka:
     instance-id: ${spring.application.name}:${EUREKA_INSTANCE_IP-ADDRESS:${spring.cloud.client.ip-address}}:${server.port}
 
 logging:
-  file: ${log.dir:@log.dir@}/${spring.application.name}.log
+  file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
     com.weilus: DEBUG
     com.netflix.discovery: ERROR

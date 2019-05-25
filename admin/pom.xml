@@ -12,10 +12,6 @@
     <artifactId>admin</artifactId>
     <version>1.0</version>
 
-    <properties>
-        <server.port>8888</server.port>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

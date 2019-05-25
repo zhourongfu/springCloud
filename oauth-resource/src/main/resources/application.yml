@@ -1,6 +1,6 @@
 debug: false
 server:
-  port: @server.port@
+  port: 8081
 
 info:
   groupId: @project.groupId@
@@ -52,7 +52,7 @@ security:
 
 
 logging:
-  file: ${log.dir:@log.dir@}/${spring.application.name}.log
+  file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
     com.feign.clients: DEBUG
     com.weilus: DEBUG

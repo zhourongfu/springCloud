@@ -19,20 +19,9 @@
 	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	  <maven.test.skip>true</maven.test.skip>
 	  <java.version>1.8</java.version>
-	  <server.port>8080</server.port>
-	  <log.dir>/data/logs</log.dir>
 
-	  <serverId>docker-aliyun</serverId>
-	  <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
-	  <dockerHost>http://192.168.198.128:2375</dockerHost>
-	  <!--<dockerCertPath>E:\dockerCerts\192.168.198.128\client</dockerCertPath>-->
-	  <registryName>weilus923</registryName>
-	  <dockerBaseImage>openjdk:8-jdk-alpine</dockerBaseImage>
-	  <dockerMaintainer>646154945@qq.com</dockerMaintainer>
-	  <dockerVolumes>[${log.dir}]</dockerVolumes>
-	  <dockerExposes>${server.port}</dockerExposes>
-	  <dockerEntryPoint>["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/${project.build.finalName}.jar"]</dockerEntryPoint>
-
+	  <dockerfile.maven.version>1.4.10</dockerfile.maven.version>
+	  <docker.registry.name.prefix>registry.cn-hangzhou.aliyuncs.com/weilus923</docker.registry.name.prefix>
   </properties>
   <modules>
   		<module>eureka</module>
@@ -140,18 +129,32 @@
 				</plugin>
 				<plugin>
 					<groupId>com.spotify</groupId>
-					<artifactId>docker-maven-plugin</artifactId>
-					<version>1.0.0</version>
+					<artifactId>dockerfile-maven-plugin</artifactId>
+					<version>${dockerfile.maven.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>javax.activation</groupId>
+							<artifactId>activation</artifactId>
+							<version>1.1.1</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>default</id>
+							<goals>
+								<goal>build</goal>
+								<goal>push</goal>
+							</goals>
+						</execution>
+					</executions>
 					<configuration>
-						<skipDockerPush>true</skipDockerPush>
-						<pushImage>true</pushImage>
-						<imageName>${registryUrl}/${registryName}/${project.artifactId}:${project.version}</imageName>
-						<resources>
-							<resource>
-								<directory>${project.build.directory}</directory>
-								<include>${project.build.finalName}.jar</include>
-							</resource>
-						</resources>
+						<repository>${docker.registry.name.prefix}/${project.artifactId}</repository>
+						<tag>${project.version}</tag>
+						<username>username</username>
+						<password>password</password>
+						<buildArgs>
+							<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+						</buildArgs>
 					</configuration>
 				</plugin>
 			</plugins>

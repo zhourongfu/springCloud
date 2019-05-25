@@ -9,10 +9,7 @@
     <artifactId>zuul</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <properties>
-        <server.port>8088</server.port>
-    </properties>
-  
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

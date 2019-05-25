@@ -9,10 +9,6 @@
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <properties>
-	  <server.port>7000</server.port>
-  </properties>
-
   <dependencies>
 	  	<dependency>
 		  	<groupId>org.springframework.cloud</groupId>
