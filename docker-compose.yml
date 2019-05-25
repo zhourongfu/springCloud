@@ -9,10 +9,13 @@ services:
       - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
     volumes:
       - /data/logs:/data/logs
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health || exit 1"]
-      interval: 20s  #检查间隔
-      retries: 5     #检查5次
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      update_config:
+        parallelism: 2
+        delay: 10s
 
   config:
     image: weilus923/config:1.0
@@ -27,11 +30,12 @@ services:
       - mysql
       - redis
       - rabbitmq
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:7000/actuator/health || exit 1"]
-      interval: 20s  #检查间隔
-      retries: 5     #检查5次
-
+      - eureka
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
   auth:
     image: weilus923/auth:1.0
     container_name: auth
@@ -42,15 +46,13 @@ services:
     volumes:
       - /data/logs:/data/logs
     depends_on:
-      - rabbitmq
-      - redis
-      - mysql
-      - eureka
       - config
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
-      interval: 20s  #检查间隔
-      retries: 5     #检查5次
+      - eureka
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
 
   zuul:
     image: weilus923/zuul:1.0
@@ -62,12 +64,15 @@ services:
     volumes:
       - /data/logs:/data/logs
     depends_on:
-      - eureka
       - config
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8088/actuator/health || exit 1"]
-      interval: 20s  #检查间隔
-      retries: 5     #检查5次
+      - eureka
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      update_config:
+        parallelism: 2
+        delay: 10s
 
   mysql:
     image: mysql:5.7
@@ -82,7 +87,13 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=weilus
     privileged: true
-
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      update_config:
+        parallelism: 2
+        delay: 10s
 
   redis:
     image: redis
@@ -92,7 +103,13 @@ services:
       - 6379:6379
     environment:
       - /data/redis/redis-data:/data
-
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      update_config:
+        parallelism: 2
+        delay: 10s
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -103,3 +120,10 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      update_config:
+        parallelism: 2
+        delay: 10s

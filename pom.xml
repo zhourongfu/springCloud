@@ -145,7 +145,7 @@
 					<configuration>
 						<skipDockerPush>true</skipDockerPush>
 						<pushImage>true</pushImage>
-						<imageName>${registryName}/${project.artifactId}:${project.version}</imageName>
+						<imageName>${registryUrl}/${registryName}/${project.artifactId}:${project.version}</imageName>
 						<resources>
 							<resource>
 								<directory>${project.build.directory}</directory>
