@@ -92,18 +92,22 @@ weilus.cloud/feign-hystrix
 推送私服 mvn dockerfile:push
 ```
 
-> 2. 微服务
+> 2. 微服务维护
 
 ```
     # 单机启动 MYSQL REDIS MQ EUREKA ZUUL 基础设施
     docker-compose -f docker-compose.yml up -d
 
-    # swarm集群启动(更新) 配置中心 认证中心  （任意节点启动）
+    # swarm集群启动(更新升级服务) 配置中心 认证中心  （任意节点启动）
     docker stack deploy -c docker-stack.yml cloud --with-registry-auth
+
+    # 回滚服务到上一个版本
+    docker service rollback cloud_config
 
     # 查看服务运行状态
     docker service ps cloud_config
 
     # 扩容config实例->2
     docker service scale cloud_config=2
+
 ```
