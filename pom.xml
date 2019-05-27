@@ -141,6 +141,7 @@
 						</execution>
 					</executions>
 					<configuration>
+						<skip>true</skip>
 						<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 						<repository>${docker.registry.name.prefix}/${project.artifactId}</repository>
 						<tag>${project.version}</tag>

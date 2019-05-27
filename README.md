@@ -82,3 +82,28 @@ weilus.cloud/feign-hystrix
 
     spring-boot-admin集成turbine; 监控熔断器
 
+
+### 微服务云端开发
+> 1. dockerfile-maven-plugin
+
+```
+环境设置 DOCKER_HOST=tcp://192.168.198.128:2375
+创建镜像 mvn dockerfile:build
+推送私服 mvn dockerfile:push
+```
+
+> 2. 微服务
+
+```
+    # 单机启动 MYSQL REDIS MQ EUREKA ZUUL 基础设施
+    docker-compose -f docker-compose.yml up -d
+
+    # swarm集群启动(更新) 配置中心 认证中心  （任意节点启动）
+    docker stack deploy -c docker-stack.yml cloud --with-registry-auth
+
+    # 查看服务运行状态
+    docker service ps cloud_config
+
+    # 扩容config实例->2
+    docker service scale cloud_config=2
+```
