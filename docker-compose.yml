@@ -1,5 +1,28 @@
 version: "3"
 services:
+  eureka:
+    image: registry.cn-hangzhou.aliyuncs.com/weilus923/eureka:1.0
+    container_name: eureka
+    ports:
+      - 8761:8761
+    environment:
+      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+      - EUREKA_IP=192.168.198.3
+    volumes:
+      - /data/logs:/data/logs
+
+  zuul:
+    image: registry.cn-hangzhou.aliyuncs.com/weilus923/zuul:1.0
+    container_name: zuul
+    ports:
+      - 8088:8088
+    environment:
+      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+    volumes:
+      - /data/logs:/data/logs
+    depends_on:
+      - eureka
+
   mysql:
     image: mysql:5.7
     container_name: mysql
@@ -13,13 +36,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=weilus
     privileged: true
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
-      update_config:
-        parallelism: 2
-        delay: 10s
+
 
   redis:
     image: redis
@@ -29,13 +46,7 @@ services:
       - 6379:6379
     environment:
       - /data/redis/redis-data:/data
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
-      update_config:
-        parallelism: 2
-        delay: 10s
+
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -46,10 +57,4 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
-      update_config:
-        parallelism: 2
-        delay: 10s
+

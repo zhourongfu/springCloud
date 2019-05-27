@@ -16,10 +16,10 @@ spring:
 
 eureka:
   client:
-    registerWithEureka: false
+    registerWithEureka: true
     fetchRegistry: false
     service-url:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8761/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${EUREKA_IP:localhost}:8761/eureka/
     healthcheck:
       enabled: true #开启健康检查(需要spring-boot-starter-actuator依赖)
   server:
