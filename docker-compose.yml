@@ -11,9 +11,9 @@ services:
     volumes:
       - /data/logs:/data/logs
 
-  zuul:
-    image: registry.cn-hangzhou.aliyuncs.com/weilus923/zuul:1.0
-    container_name: zuul
+  gateway:
+    image: registry.cn-hangzhou.aliyuncs.com/weilus923/gateway:1.0
+    container_name: gateway
     ports:
       - 8088:8088
     environment:

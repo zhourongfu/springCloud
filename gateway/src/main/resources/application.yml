@@ -33,10 +33,6 @@ hystrix:
       execution:
         isolation:
           strategy: SEMAPHORE
-zuul:
-  add-host-header: true
-  sensitive-headers: #无敏感 HttpHeader, 默认Cookie,Set-Cookie,Authorization,当前微服务自己实现鉴权
-  add-proxy-headers: true
 
 logging:
   file: ${log.dir:/data/logs}/${spring.application.name}.log
@@ -53,5 +49,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-

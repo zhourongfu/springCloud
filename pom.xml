@@ -25,13 +25,13 @@
   </properties>
   <modules>
   		<module>eureka</module>
-	  	<module>zuul</module>
   		<module>config</module>
 	  	<module>auth</module>
 	  	<module>oauth-resource</module>
 	  	<module>feign-hystrix</module>
 	    <module>admin</module>
 	  	<module>commons</module>
+	  	<module>gateway</module>
   </modules>
 		
 	<dependencyManagement>
@@ -141,7 +141,7 @@
 						</execution>
 					</executions>
 					<configuration>
-						<skip>true</skip>
+						<skipBuild>true</skipBuild>
 						<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 						<repository>${docker.registry.name.prefix}/${project.artifactId}</repository>
 						<tag>${project.version}</tag>
