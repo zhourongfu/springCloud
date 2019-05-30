@@ -56,7 +56,20 @@ curl -X POST -d 'grant_type=authorization_code&code=pg4Vz2&redirect_uri=http://a
 http://acau:acausecret@127.0.0.1:8080/oauth/token
 ```
 
-### 网关 zuul
+### 网关 gateway
+
+> 更新路由
+```
+    POST /actuator/gateway/routes/oauth HTTP/1.1
+    Host: 127.0.0.1:8088
+    Content-Type: application/json
+
+    {"uri":"lb://oauth","predicates":["Path=/oauth/**"],"filters":["StripPrefix=1"]}
+```
+> 路由列表
+```
+    GET /actuator/gateway/routes
+```
 
 ### 熔断 hystrix
 > 1. docker启动服务提供者
