@@ -34,7 +34,7 @@ rabbitmq:3-management
 #### 用户申请令牌
 ```
 curl -X POST -d 'grant_type=password&client_id=acme&username=liutaiq&password=123456' \
-http://acme:acmesecret@192.168.198.128:8080/oauth/token
+http://acme:acmesecret@192.168.198.128:8088/oauth/oauth/token
 ```
 
 #### 受信任的机构申请令牌

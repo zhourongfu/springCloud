@@ -27,11 +27,14 @@ spring:
       password: cf123456
       profile: ${spring.profiles.active}
       label: master
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
     bus:
       trace:
-        enabled: true #配置变化跟踪
+        enabled: true
+    gateway:
+      routes:
+        - id: oauth
+          uri: lb://oauth
+          predicates:
+          - Path=/oauth/**
+          filters:
+          - StripPrefix=1
