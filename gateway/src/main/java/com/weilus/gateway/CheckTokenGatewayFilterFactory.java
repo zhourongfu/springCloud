@@ -7,11 +7,11 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
@@ -36,12 +36,13 @@ public class CheckTokenGatewayFilterFactory extends AbstractGatewayFilterFactory
     public GatewayFilter apply(CheckTokenConfig config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-            String token = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            String token = extractToken(request);
+            if(StringUtils.isEmpty(token)){
+                return response(exchange,ErrorToekn.REQUIRED_TOKEN);
+            }
             Map<String,String> map = oauthClient.checkToken(token);
             if (map.containsKey("error")) {
-                ServerHttpResponse response = exchange.getResponse();
-                response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                return response.setComplete();
+                return response(exchange, ErrorToekn.ERROR_TOEKN);
             }else {
                 System.out.println(map);
                 Set<String> scope = extractScope(map);
@@ -49,13 +50,7 @@ public class CheckTokenGatewayFilterFactory extends AbstractGatewayFilterFactory
                 if(scope.contains(serviceId)){
                     return chain.filter(exchange);
                 }else {
-                    ServerHttpResponse response = exchange.getResponse();
-                    HttpHeaders httpHeaders = response.getHeaders();
-                    httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
-                    //设置body
-                    String body = String.format("不能访问服务%s",serviceId);
-                    DataBuffer bodyBuffer = response.bufferFactory().wrap(body.getBytes());
-                    return response.writeWith(Mono.just(bodyBuffer));
+                    return response(exchange,ErrorToekn.ERROR_SCOPE);
                 }
             }
         };
@@ -63,6 +58,35 @@ public class CheckTokenGatewayFilterFactory extends AbstractGatewayFilterFactory
 
     public static class CheckTokenConfig{
 
+    }
+
+    public enum ErrorToekn{
+        REQUIRED_TOKEN("需要token"),
+        ERROR_TOEKN("请登录"),
+        ERROR_SCOPE("不能访问服务")
+        ;
+        private String msg;
+        ErrorToekn(String msg){this.msg = msg;}
+        public String getMsg() {
+            return msg;
+        }
+    }
+
+    private Mono response(ServerWebExchange exchange,ErrorToekn error){
+        ServerHttpResponse response = exchange.getResponse();
+        HttpHeaders httpHeaders = response.getHeaders();
+        httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
+        DataBuffer bodyBuffer = response.bufferFactory().wrap(error.getMsg().getBytes());//设置body
+        return response.writeWith(Mono.just(bodyBuffer));
+    }
+
+    private String extractToken(ServerHttpRequest request){
+        String authorization = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if(!StringUtils.isEmpty(authorization) && authorization.startsWith("Bearer ")){
+            return authorization.substring(7);
+        }else {
+            return request.getQueryParams().getFirst("access_token");
+        }
     }
 
 

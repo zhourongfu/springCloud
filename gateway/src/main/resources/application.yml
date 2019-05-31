@@ -18,6 +18,15 @@ eureka:
       user:
         name: ${spring.security.user.name}
         password: ${spring.security.user.password}
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      oauth:
+        logger-level: full    #NONE,BASIC,HEADERS,FULL
+        connect-timeout: 30000    #连接超时
+        read-timeout:  10000      #响应超时
 
 spring:
   profiles:
@@ -53,6 +62,7 @@ ribbon:
 logging:
   file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
+    com.feign.clients: DEBUG
     com.weilus: DEBUG
     com.netflix.discovery: ERROR
     org.springframework.security: ERROR
