@@ -133,7 +133,7 @@
 					<version>${dockerfile.maven.version}</version>
 					<executions>
 						<execution>
-							<id>default</id>
+							<phase>install</phase>
 							<goals>
 								<goal>build</goal>
 								<goal>push</goal>
@@ -141,7 +141,6 @@
 						</execution>
 					</executions>
 					<configuration>
-						<skipBuild>true</skipBuild>
 						<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 						<repository>${docker.registry.name.prefix}/${project.artifactId}</repository>
 						<tag>${project.version}</tag>
