@@ -55,7 +55,8 @@ spring:
     addresses: 192.168.198.128:5672
     username: guest
     password: guest
-
+#  kafka:
+#    bootstrap-servers:
 logging:
   file: ${log.dir:/data/logs}/${spring.application.name}.log
   level:
