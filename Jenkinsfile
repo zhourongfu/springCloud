@@ -1,5 +1,5 @@
 node{
-    //curl -X POST http://user:password@192.168.198.128:8081/job/springCloud/buildWithParameters?token=TOKEN&model=gateway
+    //curl -x POST http://user:password@192.168.198.128:8081/job/springCloud/buildWithParameters?token=TOKEN&module=gateway
 
     stage('更新代码') {
         checkout scm
@@ -13,8 +13,8 @@ node{
 
     stage('构建镜像') {
         // 安装Pipeline Utility Steps插件
-        def pom = readMavenPom file: "${model}/pom.xml"
-        dir (model) {
+        def pom = readMavenPom file: "${module}/pom.xml"
+        dir (module) {
             def customImage = docker.build("registry.cn-hangzhou.aliyuncs.com/weilus923/${pom.artifactId}:${pom.version}")
             docker.withRegistry('https://registry.cn-hangzhou.aliyuncs.com/', 'registry.cn-hangzhou.aliyuncs.com') {
                 customImage.push()
