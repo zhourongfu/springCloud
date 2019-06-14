@@ -6,9 +6,7 @@ node{
     }
 
     stage('test'){
-        echo '测试打印参数${pkg}'
-        echo ${params.pkg}
-        echo ${pkg}
+        echo '测试打印参数'$pkg
     }
 //    def pkg = 'gateway'
 //
