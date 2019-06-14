@@ -4,6 +4,10 @@ node{
         checkout scm
     }
 
+    stage('test'){
+        echo '${params.build}'
+    }
+
 //    stage('编译代码') {
 //        withEnv(["MVN_HOME=/var/jenkins_home/tools/apache-maven-3.6.1"]) {
 //            sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
