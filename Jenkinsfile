@@ -1,5 +1,5 @@
 node{
-    //curl -x POST http://user:password@192.168.198.128:8081/job/springCloud/buildWithParameters?token=TOKEN&module=gateway
+    //curl "http://<USER:PASSWORD>@192.168.198.128:8081/job/springCloud/buildWithParameters?token=<TOKEN>&module=<MODULE>"
 
     stage('更新代码') {
         checkout scm
