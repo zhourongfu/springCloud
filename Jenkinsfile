@@ -1,13 +1,16 @@
 node{
     //curl -X POST http://user:password@192.168.198.128:8081/job/springCloud/build?token=TOKEN
+
+    stage('更新代码') {
+        checkout scm
+    }
+
     stage('test'){
         echo ${pkg}
     }
 //    def pkg = 'gateway'
 //
-//    stage('更新代码') {
-//        checkout scm
-//    }
+
 //
 //    stage('编译代码') {
 //        withEnv(["MVN_HOME=/var/jenkins_home/tools/apache-maven-3.6.1"]) {
