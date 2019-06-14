@@ -5,8 +5,7 @@ node{
     }
 
     stage('编译代码') {
-        def mvnHome = '${env.JENKINS_HOME}/tools/apache-maven-3.6.1'
-        withEnv(["MVN_HOME=$mvnHome"]) {
+        withEnv(["MVN_HOME='/var/jenkins_home/tools/apache-maven-3.6.1'"]) {
             sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
         }
     }
@@ -19,8 +18,8 @@ node{
         sh "docker push ${build_image}"
     }
 
-    stage('镜像部署') {
-        sh "docker stack deploy -c docker-stack.yml cloud --with-registry-auth"
-    }
+    //stage('镜像部署') {
+    //    sh "docker stack deploy -c docker-stack.yml cloud --with-registry-auth"
+    //}
 
 }
