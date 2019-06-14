@@ -13,9 +13,15 @@ node{
     stage('构建镜像') {
         // 安装Pipeline Utility Steps插件
         def pom = readMavenPom file: 'gateway/pom.xml'
-        build_image = "registry.cn-hangzhou.aliyuncs.com/weilus923/${pom.artifactId}:${pom.version}"
-        sh "docker build -t ${build_image} ./gateway/"
-        sh "docker push ${build_image}"
+        //build_image = "registry.cn-hangzhou.aliyuncs.com/weilus923/${pom.artifactId}:${pom.version}"
+        //sh "docker build -t ${build_image} ./gateway/"
+        //sh "docker push ${build_image}"
+        dir ('gateway') {
+            def customImage = docker.build("registry.cn-hangzhou.aliyuncs.com/weilus923/${pom.artifactId}:${pom.version}")
+            docker.withRegistry('https://registry.cn-hangzhou.aliyuncs.com/', 'registry.cn-hangzhou.aliyuncs.com') {
+                customImage.push()
+            }
+        }
     }
 
     //stage('镜像部署') {
