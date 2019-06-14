@@ -1,11 +1,11 @@
 node{
-    // http://192.168.198.128:8081/job/springCloud/build?token=123456789
+    // http://192.168.198.128:8081/job/springCloud/build?token=123456789&build=auth
     stage('更新代码') {
         checkout scm
     }
 
     stage('test'){
-        echo '${params.build}'
+        echo ${params.build}
     }
 
 //    stage('编译代码') {
