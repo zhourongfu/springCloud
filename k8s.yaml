@@ -4,24 +4,28 @@ metadata:
   name: config
 spec:
   replicas: 1
-  spec:
-    containers:
-      - name: config
-        image: registry.cn-hangzhou.aliyuncs.com/weilus923/config:1.0
-        ports:
-          - name: http
-            containerPort: 7000
-        env: 
-          - name: EUREKA_INSTANCE_IP-ADDRESS
-            valueFrom:
-              fieldRef:
-                fieldPath: spec.nodeName
-        volumeMounts:
-          - name: volume-log
-            mountPath: /data/logs
-        restartPolicy: Always
-        imagePullPolicy: IfNotPresent
-    volumes:
-      - name: volume-log
-        hostPath:
-         path: /data/logs
+  template:
+    metadata:
+      labels:
+        app: config
+    spec:
+      containers:
+        - name: config
+          image: registry.cn-hangzhou.aliyuncs.com/weilus923/config:1.0
+          ports:
+            - name: http
+              containerPort: 7000
+          env: 
+            - name: EUREKA_INSTANCE_IP-ADDRESS
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: volume-log
+              mountPath: /data/logs
+          restartPolicy: Always
+          imagePullPolicy: IfNotPresent
+      volumes:
+        - name: volume-log
+          hostPath:
+           path: /data/logs
