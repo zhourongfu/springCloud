@@ -11,17 +11,17 @@ services:
     volumes:
       - /data/logs:/data/logs
 
-  gateway:
-    image: registry.cn-hangzhou.aliyuncs.com/weilus923/gateway:1.0
-    container_name: gateway
-    ports:
-      - 8088:8088
-    environment:
-      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
-    volumes:
-      - /data/logs:/data/logs
-    depends_on:
-      - eureka
+#  gateway:
+#    image: registry.cn-hangzhou.aliyuncs.com/weilus923/gateway:1.0
+#    container_name: gateway
+#    ports:
+#      - 8088:8088
+#    environment:
+#      - EUREKA_INSTANCE_IP-ADDRESS=192.168.198.128
+#    volumes:
+#      - /data/logs:/data/logs
+#    depends_on:
+#      - eureka
 
   mysql:
     image: mysql:5.7
