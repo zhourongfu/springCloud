@@ -21,7 +21,7 @@ spec:
         volumeMounts:
         - name: config-logs
           mountPath: /data/logs
-          readOnly: flase
+          readOnly: Flase
       volumes:
       - name: config-logs
         hostPath:
