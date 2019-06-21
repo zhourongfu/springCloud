@@ -14,8 +14,10 @@ spec:
     spec:
       containers:
       - name: config
-        image: registry.cn-hangzhou.aliyuncs.com/weilus923/auth:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/eureka:1.0
         imagePullPolicy: IfNotPresent
+        imagePullSecrets:
+        - name: docker-registry-key
         ports:
         - containerPort: 8761
         volumeMounts:
@@ -58,6 +60,8 @@ spec:
       - name: config
         image: registry.cn-hangzhou.aliyuncs.com/weilus923/config:1.0
         imagePullPolicy: IfNotPresent
+        imagePullSecrets:
+        - name: docker-registry-key
         ports:
         - containerPort: 7000
         volumeMounts:
@@ -87,8 +91,41 @@ spec:
       - name: config
         image: registry.cn-hangzhou.aliyuncs.com/weilus923/gateway:1.0
         imagePullPolicy: IfNotPresent
+        imagePullSecrets:
+        - name: docker-registry-key
         ports:
         - containerPort: 8088
+        volumeMounts:
+        - name: config-logs
+          mountPath: /data/logs
+          readOnly: flase
+      volumes:
+      - name: config-logs
+        hostPath:
+          path: /data/logs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weilus.cloud-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weilus.cloud-auth
+  template:
+    metadata:
+      labels:
+        app: weilus.cloud-auth
+    spec:
+      containers:
+      - name: config
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/auth:1.0
+        imagePullPolicy: IfNotPresent
+        imagePullSecrets:
+        - name: docker-registry-key
+        ports:
+        - containerPort: 8080
         volumeMounts:
         - name: config-logs
           mountPath: /data/logs
