@@ -22,9 +22,8 @@ node{
         }
     }
 
-//    stage('镜像部署') {
-//        //sh "docker-compose up -d"
-//        //sh "docker stack deploy -c docker-stack.yml cloud --with-registry-auth"
-//    }
+    stage('镜像部署') {
+        sh "kubectl apply -f k8s.yaml"
+    }
 
 }
