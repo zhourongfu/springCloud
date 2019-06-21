@@ -1,50 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weilus.cloud-eureka
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: weilus.cloud-eureka
-  template:
-    metadata:
-      labels:
-        app: weilus.cloud-eureka
-    spec:
-      containers:
-      - name: config
-        image: registry.cn-hangzhou.aliyuncs.com/weilus923/eureka:1.0
-        imagePullPolicy: IfNotPresent
-        imagePullSecrets:
-        - name: docker-registry-key
-        ports:
-        - containerPort: 8761
-        volumeMounts:
-        - name: config-logs
-          mountPath: /data/logs
-          readOnly: flase
-      volumes:
-      - name: config-logs
-        hostPath:
-          path: /data/logs
----
-apiVersion: apps/v1
-kind: Service
-metadata:
-  name: eureka-server
-spec:
-  ports:
-  - port: 8761
-    protocol: TCP
-    targetPort: 8761
-  type: NodePort
-  selector:
-    app: weilus.cloud-eureka
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: weilus.cloud-config
 spec:
   replicas: 1
