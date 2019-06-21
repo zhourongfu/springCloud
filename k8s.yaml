@@ -1,31 +1,99 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: config
+  name: weilus.cloud-eureka
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: weilus.cloud-eureka
   template:
     metadata:
       labels:
-        app: config
+        app: weilus.cloud-eureka
     spec:
       containers:
-        - name: config
-          image: registry.cn-hangzhou.aliyuncs.com/weilus923/config:1.0
-          ports:
-            - name: http
-              containerPort: 7000
-          env: 
-            - name: EUREKA_INSTANCE_IP-ADDRESS
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
-          volumeMounts:
-            - name: volume-log
-              mountPath: /data/logs
-          restartPolicy: Always
-          imagePullPolicy: IfNotPresent
+      - name: config
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/auth:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8761
+        volumeMounts:
+        - name: config-logs
+          mountPath: /data/logs
+          readOnly: flase
       volumes:
-        - name: volume-log
-          hostPath:
-           path: /data/logs
+      - name: config-logs
+        hostPath:
+          path: /data/logs
+---
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: eureka-server
+spec:
+  ports:
+  - port: 8761
+    protocol: TCP
+    targetPort: 8761
+  type: NodePort
+  selector:
+    app: weilus.cloud-eureka
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weilus.cloud-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weilus.cloud-config
+  template:
+    metadata:
+      labels:
+        app: weilus.cloud-config
+    spec:
+      containers:
+      - name: config
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/config:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7000
+        volumeMounts:
+        - name: config-logs
+          mountPath: /data/logs
+          readOnly: flase
+      volumes:
+      - name: config-logs
+        hostPath:
+          path: /data/logs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weilus.cloud-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weilus.cloud-gateway
+  template:
+    metadata:
+      labels:
+        app: weilus.cloud-gateway
+    spec:
+      containers:
+      - name: config
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/gateway:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8088
+        volumeMounts:
+        - name: config-logs
+          mountPath: /data/logs
+          readOnly: flase
+      volumes:
+      - name: config-logs
+        hostPath:
+          path: /data/logs
