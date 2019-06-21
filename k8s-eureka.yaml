@@ -1,27 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weilus.cloud-eureka
+  name: weilus.cloud-eureka1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: weilus.cloud-eureka
+      app: weilus.cloud-eureka1
   template:
     metadata:
       labels:
-        app: weilus.cloud-eureka
+        app: weilus.cloud-eureka1
     spec:
       containers:
-      - name: config
+      - name: eureka
         image: registry.cn-hangzhou.aliyuncs.com/weilus923/eureka:1.0
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8761
+        - containerPort: 7000
+        env:
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:123456@10.96.192.151:8761/eureka/
         volumeMounts:
         - name: config-logs
           mountPath: /data/logs
-          readOnly: Flase
       volumes:
       - name: config-logs
         hostPath:
@@ -30,14 +32,34 @@ spec:
       - name: docker-registry-key
 ---
 apiVersion: apps/v1
-kind: Service
+kind: Deployment
 metadata:
-  name: eureka-server
+  name: weilus.cloud-eureka2
 spec:
-  ports:
-  - port: 8761
-    protocol: TCP
-    targetPort: 8761
-  type: NodePort
+  replicas: 1
   selector:
-    app: weilus.cloud-eureka
+    matchLabels:
+      app: weilus.cloud-eureka2
+  template:
+    metadata:
+      labels:
+        app: weilus.cloud-eureka2
+    spec:
+      containers:
+      - name: eureka
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/eureka:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7000
+        env:
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:123456@10.103.239.44:8761/eureka/
+        volumeMounts:
+        - name: config-logs
+          mountPath: /data/logs
+      volumes:
+      - name: config-logs
+        hostPath:
+          path: /data/logs
+      imagePullSecrets:
+      - name: docker-registry-key

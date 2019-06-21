@@ -16,18 +16,20 @@ spec:
       - name: config
         image: registry.cn-hangzhou.aliyuncs.com/weilus923/config:1.0
         imagePullPolicy: IfNotPresent
-        imagePullSecrets:
-        - name: docker-registry-key
         ports:
         - containerPort: 7000
+        env:
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:123456@10.103.16.92:8761/eureka/
         volumeMounts:
         - name: config-logs
           mountPath: /data/logs
-          readOnly: flase
       volumes:
       - name: config-logs
         hostPath:
           path: /data/logs
+      imagePullSecrets:
+      - name: docker-registry-key
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,21 +46,23 @@ spec:
         app: weilus.cloud-gateway
     spec:
       containers:
-      - name: config
+      - name: gateway
         image: registry.cn-hangzhou.aliyuncs.com/weilus923/gateway:1.0
         imagePullPolicy: IfNotPresent
-        imagePullSecrets:
-        - name: docker-registry-key
         ports:
         - containerPort: 8088
+        env:
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:123456@10.103.16.92:8761/eureka/
         volumeMounts:
         - name: config-logs
           mountPath: /data/logs
-          readOnly: flase
       volumes:
       - name: config-logs
         hostPath:
           path: /data/logs
+      imagePullSecrets:
+      - name: docker-registry-key
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -75,18 +79,20 @@ spec:
         app: weilus.cloud-auth
     spec:
       containers:
-      - name: config
+      - name: auth
         image: registry.cn-hangzhou.aliyuncs.com/weilus923/auth:1.0
         imagePullPolicy: IfNotPresent
-        imagePullSecrets:
-        - name: docker-registry-key
         ports:
         - containerPort: 8080
+        env:
+        - name: eureka.client.serviceUrl.defaultZone
+          value: http://eureka:123456@10.103.16.92:8761/eureka/
         volumeMounts:
         - name: config-logs
           mountPath: /data/logs
-          readOnly: flase
       volumes:
       - name: config-logs
         hostPath:
           path: /data/logs
+      imagePullSecrets:
+      - name: docker-registry-key
