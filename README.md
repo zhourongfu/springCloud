@@ -1,11 +1,4 @@
 # springCloud
-![结构](https://github.com/weilus923/springCloud/blob/master/test.jpg)
-### 注册中心 eureka
-
-    依次启动 eurekaService
-    查看服务注册 ->访问 http://localhost:8761
-    账号：eureka
-    密码：123456
 
 ### 配置中心 config
 > 1. docker安装rabbitMq
