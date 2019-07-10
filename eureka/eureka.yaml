@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-svc
+  namespace: netflix-cloud
+spec:
+  ports:
+  - port: 8761
+    targetPort: 8761
+  clusterIP: None
+  selector:
+    app: eureka
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eureka
+  namespace: netflix-cloud
+spec:
+  serviceName: eureka-svc
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eureka
+  template:
+    metadata:
+      labels:
+        app: eureka
+    spec:
+      volumes:
+      - name: config-logs
+        hostPath:
+          path: /data/logs
+      imagePullSecrets:
+      - name: docker-registry-key
+      containers:
+      - name: k8seureka
+        image: registry.cn-hangzhou.aliyuncs.com/weilus923/eureka:1.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7000
+        env:
+        - name: REPLICAS
+          value: 3
+        volumeMounts:
+        - name: config-logs
+          mountPath: /data/logs
